@@ -22,6 +22,7 @@
     "verify:milestone-2": "./scripts/verify-milestone-2.sh",
     "public-release-check": "node scripts/public-release-check.mjs --mode git-worktree",
     "test:public-release": "node --test scripts/public-snapshot-files.test.mjs && node scripts/public-release-check.mjs --self-test",
+    "test:ci-workflow": "node --test scripts/ci-workflow.test.mjs",
     "secrets:gitleaks": "node scripts/gitleaks-gate.mjs",
     "secrets:trufflehog": "node scripts/trufflehog-gate.mjs",
     "sbom": "node scripts/generate-sbom.mjs",
