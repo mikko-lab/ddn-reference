@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/api-v1/get-anchor-response.schema.json",
+  "title": "GetAnchorResponseV1",
+  "description": "200 response body for GET /v1/decisions/{decisionId}/anchor. Only ever returned once the decision's receipt has actually been confirmed on-chain (anchor sidecar status CONFIRMED). An existing decision owned by the authenticated tenant whose anchor sidecar hasn't reached CONFIRMED yet -- ELIGIBLE/BATCHED/SUBMITTED/REORG_PENDING/ANCHOR_FAILED, or not yet FINALIZED at all -- responds 409 ANCHOR_NOT_AVAILABLE. An unknown decisionId, or one belonging to a different tenant, responds 404 DECISION_NOT_FOUND, identical in both cases so a caller can never distinguish 'not yours' from 'doesn't exist'. See docs/api-v1.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "receiptId", "batchId", "merkleRoot", "proof", "chain", "confirmation"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "receiptId": { "type": "string", "minLength": 1 },
+    "batchId": { "type": "string", "minLength": 1 },
+    "merkleRoot": { "type": "string", "minLength": 1 },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["leafHash", "leafIndex", "siblings", "totalLeaves"],
+      "properties": {
+        "leafHash": { "type": "string", "minLength": 1 },
+        "leafIndex": { "type": "integer", "minimum": 0 },
+        "siblings": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "totalLeaves": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chainId", "contractAddress"],
+      "properties": {
+        "chainId": { "type": "integer", "minimum": 1 },
+        "contractAddress": { "type": "string", "minLength": 1 }
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["txHash", "blockNumber", "blockHash", "confirmedAt"],
+      "properties": {
+        "txHash": { "type": "string", "minLength": 1 },
+        "blockNumber": { "type": "integer", "minimum": 0 },
+        "blockHash": { "type": "string", "minLength": 1 },
+        "confirmedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+DDN Reference
+Copyright 2026 Mikko Tarkiainen
+
+This product includes third-party software. Each third-party component remains
+subject to its own license and attribution requirements. The release process
+must preserve the license texts and notices identified by the dependency
+license report and the vendored-source manifest.
+
+The public snapshot vendors Forge Standard Library (forge-std) at commit
+c179529c064588ede54a0661ec3cc98219460d07. forge-std is available under
+MIT OR Apache-2.0; its LICENSE-MIT and LICENSE-APACHE files are preserved with
+the vendored source.

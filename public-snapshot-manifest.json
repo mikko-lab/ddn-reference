@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0.0",
+  "destination": "mikko-lab/ddn-reference",
+  "allowedRoots": [
+    ".github/workflows",
+    "apps/anchor-service",
+    "apps/api",
+    "apps/coordinator",
+    "apps/demo-negotiation-reference",
+    "apps/explorer/e2e/a11y.spec.ts",
+    "apps/explorer/next-env.d.ts",
+    "apps/explorer/next.config.ts",
+    "apps/explorer/package.json",
+    "apps/explorer/playwright.config.ts",
+    "apps/explorer/src/app/api/demo",
+    "apps/explorer/src/app/decisions",
+    "apps/explorer/src/app/layout.tsx",
+    "apps/explorer/src/app/page.tsx",
+    "apps/explorer/src/app/verify",
+    "apps/explorer/src/lib/demo-bff-client.ts",
+    "apps/explorer/src/lib/demo-bff-env.test.ts",
+    "apps/explorer/src/lib/demo-bff-env.ts",
+    "apps/explorer/src/lib/verify-input.test.ts",
+    "apps/explorer/src/lib/verify-input.ts",
+    "apps/explorer/src/server/demo-bff-config.ts",
+    "apps/explorer/src/server/demo-bff-handler.ts",
+    "apps/explorer/tsconfig.json",
+    "apps/explorer/tsconfig.test.json",
+    "apps/validator",
+    "contracts",
+    "docs/anchor-v1.md",
+    "docs/api-security-model.md",
+    "docs/api-v1.md",
+    "docs/canonical-json-profile-v1.md",
+    "docs/crypto-profile-v1.md",
+    "docs/decision-receipt-v1.md",
+    "docs/decisions/ADR-001-no-custom-blockchain.md",
+    "docs/decisions/ADR-002-wasm-deterministic-runtime.md",
+    "docs/decisions/ADR-003-canonical-json.md",
+    "docs/decisions/ADR-005-public-chain-stores-roots-only.md",
+    "docs/dependency-license-review.md",
+    "docs/execution-profile-v1.md",
+    "docs/limitations.md",
+    "docs/milestone-2-verification.md",
+    "docs/negotiation-policy-v1.md",
+    "docs/public-demo-boundary.md",
+    "docs/public-project-description.md",
+    "docs/public-snapshot-manifest.md",
+    "docs/reproducible-builds.md",
+    "docs/threat-model.md",
+    "docs/trust-model.md",
+    "docs/validator-result-v1.md",
+    "e2e",
+    "infra/docker",
+    "packages",
+    "policies",
+    "scripts"
+  ],
+  "allowedRootFiles": [
+    ".gitignore",
+    ".node-version",
+    "CONTRIBUTING.md",
+    "Cargo.lock",
+    "Cargo.toml",
+    "dependency-license-evidence.json",
+    "eslint.config.js",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "SECURITY.md",
+    "package.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    "public-snapshot-manifest.json",
+    "tsconfig.base.json",
+    "turbo.json"
+  ],
+  "excludedPaths": [
+    "contracts/lib/forge-std/test",
+    "node_modules",
+    "target",
+    "dist",
+    "out"
+  ],
+  "exactTestCredentialExceptions": [
+    "apps/anchor-service/src/chain-client.integration.test.ts",
+    "apps/explorer/src/lib/demo-bff-env.test.ts",
+    "apps/validator/src/golden_vectors.rs",
+    "apps/validator/tests/protocol_negative_tests.rs",
+    "apps/coordinator/src/test-fixtures/golden-vectors.ts",
+    "packages/demo-trust-profile/src/test-fixtures/fixed-demo-validator-keys.ts",
+    "packages/demo-trust-profile/src/test-fixtures/fixed-local-anvil-deploy.ts",
+    "packages/test-vectors/vectors/crypto-v1.json",
+    "packages/test-vectors/vectors/validator-protocol-v1"
+  ],
+  "vendoredSources": [
+    {
+      "path": "contracts/lib/forge-std",
+      "sourceUrl": "https://github.com/foundry-rs/forge-std",
+      "commit": "c179529c064588ede54a0661ec3cc98219460d07",
+      "license": "MIT OR Apache-2.0"
+    }
+  ],
+  "secretScannerExceptions": [
+    {
+      "scanner": "trufflehog",
+      "detector": "Infura",
+      "path": "contracts/lib/forge-std/src/StdChains.sol",
+      "line": 204,
+      "fingerprintSha256": "3f5c72074b7686de25d2268dc1f33347a160df6b03c0aed4706bd45aab1132e9",
+      "vendoredSourceCommit": "c179529c064588ede54a0661ec3cc98219460d07",
+      "classification": "upstream-test-vector"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "apps/coordinator/src/test-fixtures/golden-vectors.ts", "line": 41, "count": 2,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "apps/coordinator/src/test-fixtures/golden-vectors.ts", "line": 42, "count": 2,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "apps/coordinator/src/test-fixtures/golden-vectors.ts", "line": 43, "count": 2,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "apps/validator/src/identity.rs", "line": 59, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/profile/trusted-demo-profile.json", "line": 9, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/profile/trusted-demo-profile.json", "line": 14, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/profile/trusted-demo-profile.json", "line": 19, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/src/test-fixtures/fixed-demo-validator-keys.ts", "line": 24, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/src/test-fixtures/fixed-demo-validator-keys.ts", "line": 25, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/src/test-fixtures/fixed-demo-validator-keys.ts", "line": 28, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/src/test-fixtures/fixed-demo-validator-keys.ts", "line": 29, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/src/test-fixtures/fixed-demo-validator-keys.ts", "line": 32, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/demo-trust-profile/src/test-fixtures/fixed-demo-validator-keys.ts", "line": 33, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/canonical-validator-set.txt", "line": 1, "count": 3,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/crypto-v1.json", "line": 6, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/crypto-v1.json", "line": 7, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/crypto-v1.json", "line": 16, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/signed-result-validator-a.json", "line": 24, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/signed-result-validator-b.json", "line": 24, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/signed-result-validator-c.json", "line": 24, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/validator-set.json", "line": 7, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/validator-set.json", "line": 12, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/validator-set.json", "line": 17, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/decision-receipt.json", "line": 68, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/decision-receipt.json", "line": 95, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/decision-receipt.json", "line": 122, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/decision-receipt-v1/canonical-receipt.txt", "line": 1, "count": 3,
+      "classification": "deterministic-public-test-fixture"
+    },
+    {
+      "scanner": "gitleaks", "rule": "generic-api-key", "path": "packages/test-vectors/vectors/validator-protocol-v1/signed-validator-result.json", "line": 24, "count": 1,
+      "classification": "deterministic-public-test-fixture"
+    }
+  ]
+}

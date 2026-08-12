@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/api-v1/verify-receipt-response.schema.json",
+  "title": "VerifyReceiptResponseV1",
+  "description": "200 response body for POST /v1/receipts/verify. This is a convenience server-side re-check using the same @ddn/receipt-sdk verification an external client can run locally -- it is never the client's sole basis for trust, see docs/api-v1.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "checks"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "status": { "enum": ["VALID", "INVALID"] },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "passed"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "passed": { "type": "boolean" },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "receiptId": { "type": "string" }
+  }
+}

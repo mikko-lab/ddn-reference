@@ -1,0 +1,741 @@
+{
+  "note": "Synthetic negotiation-v1 test vectors for this repository. Not derived from any production data.",
+  "vectorVersion": "1.0.0",
+  "vectors": [
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2500000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_LIST\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_LIST"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "accept-offer-equals-list",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2500000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:2ad8aa3d9a3d1652f3b230202185e6f05c7ea1b6ac10af60f84417f3b0e33dc3",
+      "outputHash": "sha256:fc492d0b7f9aaf4a48eb223c3bc65d7e24f21d37e594e3e1347b0405348f6b3e"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2550000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_LIST\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_LIST"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "accept-offer-above-list",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2550000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:84fc93336a12f169240e604bdda3f7300f2b1fcd823b46c764e5ee14f128a10f",
+      "outputHash": "sha256:fc492d0b7f9aaf4a48eb223c3bc65d7e24f21d37e594e3e1347b0405348f6b3e"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2300000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_FLOOR\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_FLOOR"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "accept-offer-equals-floor",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2300000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:b9826c7cd6ee1c18b80367896a96b97f7a0aa876b87ca4bbd55b9f1b0af19701",
+      "outputHash": "sha256:2357c486cec3124bf14a25ea1e4f01219d2456a7ceb53df0c507731a604c24fe"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2400000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":2,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_FLOOR\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_FLOOR"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "accept-offer-between-floor-and-list",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2400000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 2,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:cc89ca4595d2276b69b0414960877866e12c7142d356c59b3b24e0bc5221d575",
+      "outputHash": "sha256:2357c486cec3124bf14a25ea1e4f01219d2456a7ceb53df0c507731a604c24fe"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2300001,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_FLOOR\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_FLOOR"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "accept-offer-first-round",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2300001,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:26f549334114dc24882521647b77c92a0d26c0853fdfd3b9b9b7a4fa06229e1d",
+      "outputHash": "sha256:2357c486cec3124bf14a25ea1e4f01219d2456a7ceb53df0c507731a604c24fe"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2300001,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":4,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_FLOOR\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_FLOOR"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "accept-offer-on-last-round",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2300001,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 4,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:7d730680ee120c41a4dd24a3957af8272ced6b98ef48bf28bfa2f0f53e05dfc5",
+      "outputHash": "sha256:2357c486cec3124bf14a25ea1e4f01219d2456a7ceb53df0c507731a604c24fe"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2299999,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":2300000,\"decision\":\"COUNTER\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": 2300000,
+        "decision": "COUNTER",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "FINAL_COUNTER_AVAILABLE"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "counter-one-cent-below-floor",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2299999,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f",
+      "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":1800000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":2300000,\"decision\":\"COUNTER\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": 2300000,
+        "decision": "COUNTER",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "FINAL_COUNTER_AVAILABLE"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "counter-well-below-floor",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 1800000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:e6f2e4354a872677a1e8b9fff73f86dcbd86c1b3b5ca64f996a1fe67a9f7774c",
+      "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2200000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":2300000,\"decision\":\"COUNTER\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": 2300000,
+        "decision": "COUNTER",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "FINAL_COUNTER_AVAILABLE"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "counter-first-of-four-offers",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2200000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:80fe351d4953ce23261e85eb3b01ed6416a79aaa28df8c44b78e0af0746f0037",
+      "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2200000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":3,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":2300000,\"decision\":\"COUNTER\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": 2300000,
+        "decision": "COUNTER",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "FINAL_COUNTER_AVAILABLE"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "counter-third-of-four-offers",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2200000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 3,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:b39992b3c875389bc3948d717f09d7d868f3baf1139251eb5a06c1aacc160ccd",
+      "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2100000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":5,\"offerNumber\":2,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":2300000,\"decision\":\"COUNTER\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": 2300000,
+        "decision": "COUNTER",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "FINAL_COUNTER_AVAILABLE"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "counter-price-equals-floor",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2100000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 5,
+        "offerNumber": 2,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:89d39da25ebfc00ef32b976f6ee7ad196e91cd6eef1727640c791a8e0111eec9",
+      "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2200000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":2,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":2300000,\"decision\":\"COUNTER\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": 2300000,
+        "decision": "COUNTER",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "FINAL_COUNTER_AVAILABLE"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "counter-single-offer-remaining",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2200000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 2,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:50377a4d5da1c4a101c9f660921568a95160fcc60a71964f91c08f5e07c98f1c",
+      "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2299999,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":4,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"REJECT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"OFFER_LIMIT_REACHED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "REJECT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "OFFER_LIMIT_REACHED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "reject-last-round-below-floor",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2299999,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 4,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:7ac0f9f7dcaf4aeba8881eb2fbb456b5238f6c2a0eb7ef962639b691835760fd",
+      "outputHash": "sha256:d7aa2222ae012e8f013985e5b3f96651e241f4e13d85cd819796eb8e10a3d88a"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":1,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":4,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"REJECT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"OFFER_LIMIT_REACHED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "REJECT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "OFFER_LIMIT_REACHED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "reject-very-low-offer-last-round",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 1,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 4,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:57be7cd66cb74c9d02473852ed2100790e20098b5a82475017dab43264e46a80",
+      "outputHash": "sha256:d7aa2222ae012e8f013985e5b3f96651e241f4e13d85cd819796eb8e10a3d88a"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2250000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":1,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"REJECT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"OFFER_LIMIT_REACHED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "REJECT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "OFFER_LIMIT_REACHED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "reject-single-offer-policy",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2250000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 1,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:01ff037906daea31a6b19efaf011eaa736f3f85e1b6c47682b8f4da9d8c09375",
+      "outputHash": "sha256:d7aa2222ae012e8f013985e5b3f96651e241f4e13d85cd819796eb8e10a3d88a"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2250000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":6,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"REJECT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"OFFER_LIMIT_REACHED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": true,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "REJECT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_BELOW_FLOOR",
+          "OFFER_LIMIT_REACHED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "reject-offer-number-exceeds-max",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2250000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 6,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:a331edf37cab8228ed23e4e44eb162b4a3f350eef084e1ade067e7a6d62563dc",
+      "outputHash": "sha256:d7aa2222ae012e8f013985e5b3f96651e241f4e13d85cd819796eb8e10a3d88a"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":false,\"customerOfferCents\":2300001,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ESCALATE\",\"humanReviewRequired\":true,\"reasonCodes\":[\"CONDITION_REPORT_NOT_ACKNOWLEDGED\",\"HUMAN_REVIEW_REQUIRED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ESCALATE",
+        "humanReviewRequired": true,
+        "reasonCodes": [
+          "CONDITION_REPORT_NOT_ACKNOWLEDGED",
+          "HUMAN_REVIEW_REQUIRED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "escalate-condition-report-not-acknowledged",
+      "input": {
+        "conditionReportAcknowledged": false,
+        "customerOfferCents": 2300001,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:fb5020d96e5e197f951fe124225b38dec945906ffcd581d0c07e07451cc4cd6d",
+      "outputHash": "sha256:da181287b472bce11c95ab98b26524ea4a8514123ea1deccea56debda8754ad5"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":false,\"customerOfferCents\":2500001,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ESCALATE\",\"humanReviewRequired\":true,\"reasonCodes\":[\"CONDITION_REPORT_NOT_ACKNOWLEDGED\",\"HUMAN_REVIEW_REQUIRED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ESCALATE",
+        "humanReviewRequired": true,
+        "reasonCodes": [
+          "CONDITION_REPORT_NOT_ACKNOWLEDGED",
+          "HUMAN_REVIEW_REQUIRED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "escalate-condition-report-not-acknowledged-high-offer",
+      "input": {
+        "conditionReportAcknowledged": false,
+        "customerOfferCents": 2500001,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:c68d05c43a98505414b1997b4ce19622361e3e8950787401ebaf3c4bbc138a78",
+      "outputHash": "sha256:da181287b472bce11c95ab98b26524ea4a8514123ea1deccea56debda8754ad5"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2299999,\"floorPriceCents\":2300000,\"listPriceCents\":2299999,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ESCALATE\",\"humanReviewRequired\":true,\"reasonCodes\":[\"INVALID_PRICE_RELATION\",\"HUMAN_REVIEW_REQUIRED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": true,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ESCALATE",
+        "humanReviewRequired": true,
+        "reasonCodes": [
+          "INVALID_PRICE_RELATION",
+          "HUMAN_REVIEW_REQUIRED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "escalate-invalid-price-relation",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2299999,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2299999,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:0681ec977c141e72dcc2afd455ae0b9bc7f2838cf4f241600f885851e20fe213",
+      "outputHash": "sha256:29b71e310a3479bf98f2992e84ffde88fd4f6bc1091cbac3b57837c7421f4a6f"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":0,\"floorPriceCents\":200,\"listPriceCents\":100,\"maxOffers\":1,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ESCALATE\",\"humanReviewRequired\":true,\"reasonCodes\":[\"INVALID_PRICE_RELATION\",\"HUMAN_REVIEW_REQUIRED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": true,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ESCALATE",
+        "humanReviewRequired": true,
+        "reasonCodes": [
+          "INVALID_PRICE_RELATION",
+          "HUMAN_REVIEW_REQUIRED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "escalate-invalid-price-relation-large-gap",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 0,
+        "floorPriceCents": 200,
+        "listPriceCents": 100,
+        "maxOffers": 1,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:16546b6a73354535b200d5e2261b10d6bf7e725a6f5b5cd677005b4edb6fa7d0",
+      "outputHash": "sha256:29b71e310a3479bf98f2992e84ffde88fd4f6bc1091cbac3b57837c7421f4a6f"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":false,\"customerOfferCents\":0,\"floorPriceCents\":200,\"listPriceCents\":100,\"maxOffers\":1,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ESCALATE\",\"humanReviewRequired\":true,\"reasonCodes\":[\"CONDITION_REPORT_NOT_ACKNOWLEDGED\",\"HUMAN_REVIEW_REQUIRED\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": true,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ESCALATE",
+        "humanReviewRequired": true,
+        "reasonCodes": [
+          "CONDITION_REPORT_NOT_ACKNOWLEDGED",
+          "HUMAN_REVIEW_REQUIRED"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "escalate-condition-report-overrides-invalid-price-relation",
+      "input": {
+        "conditionReportAcknowledged": false,
+        "customerOfferCents": 0,
+        "floorPriceCents": 200,
+        "listPriceCents": 100,
+        "maxOffers": 1,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:41e9b84a539b612f0497905345c8a51b7118b7c241e6aecd410918ff24eaeb81",
+      "outputHash": "sha256:da181287b472bce11c95ab98b26524ea4a8514123ea1deccea56debda8754ad5"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":0,\"floorPriceCents\":0,\"listPriceCents\":0,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_LIST\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_LIST"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "boundary-zero-prices-accept",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 0,
+        "floorPriceCents": 0,
+        "listPriceCents": 0,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:75b8d5d30aac7871f32a4006324f51aee55a8eed362411e0742563387e91ab25",
+      "outputHash": "sha256:fc492d0b7f9aaf4a48eb223c3bc65d7e24f21d37e594e3e1347b0405348f6b3e"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":9000000000000,\"floorPriceCents\":9000000000000,\"listPriceCents\":9007199254740000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_FLOOR\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_FLOOR"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "boundary-large-safe-integer-prices",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 9000000000000,
+        "floorPriceCents": 9000000000000,
+        "listPriceCents": 9007199254740000,
+        "maxOffers": 4,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:a9b064e9e31be7d4a95614d1e16e59809157aef0a3b1a700c1391149d4a914d7",
+      "outputHash": "sha256:2357c486cec3124bf14a25ea1e4f01219d2456a7ceb53df0c507731a604c24fe"
+    },
+    {
+      "canonicalInput": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2500000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":1,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "canonicalOutput": "{\"counterOfferCents\":null,\"decision\":\"ACCEPT\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_AT_OR_ABOVE_LIST\"],\"schemaVersion\":\"1.0.0\"}",
+      "defenseInDepth": false,
+      "expectedOutput": {
+        "counterOfferCents": null,
+        "decision": "ACCEPT",
+        "humanReviewRequired": false,
+        "reasonCodes": [
+          "OFFER_AT_OR_ABOVE_LIST"
+        ],
+        "schemaVersion": "1.0.0"
+      },
+      "id": "boundary-single-round-accept",
+      "input": {
+        "conditionReportAcknowledged": true,
+        "customerOfferCents": 2500000,
+        "floorPriceCents": 2300000,
+        "listPriceCents": 2500000,
+        "maxOffers": 1,
+        "offerNumber": 1,
+        "policyEffectiveAt": "2026-01-01T00:00:00Z",
+        "schemaVersion": "1.0.0",
+        "sessionId": "session-synthetic-01",
+        "tenantId": "tenant-synthetic-01",
+        "vehicleId": "vehicle-synthetic-01"
+      },
+      "inputHash": "sha256:77f061b13b292cdb584f9bd94ceb8bf7f6ded909da76ffb7e3293c8f888be75c",
+      "outputHash": "sha256:fc492d0b7f9aaf4a48eb223c3bc65d7e24f21d37e594e3e1347b0405348f6b3e"
+    }
+  ]
+}

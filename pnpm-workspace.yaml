@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+packages:
+  - "apps/*"
+  - "packages/*/ts"
+  - "packages/schemas"
+  - "packages/policy-sdk"
+  - "packages/receipt-sdk"
+  - "packages/client-sdk"
+  - "packages/demo-trust-profile"
+  - "packages/receipt-ui"
+  - "packages/demo-web-kit"
+  - "packages/test-vectors"
+  - "packages/config"
+  - "e2e"

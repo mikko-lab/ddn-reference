@@ -1,0 +1,1158 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "DDN API v1",
+    "version": "1.0.0",
+    "description": "Versioned HTTP API for submitting DDN decisions, polling their status, fetching DecisionReceiptV1 for offline verification, and listing/inspecting registered policies. See docs/api-v1.md."
+  },
+  "paths": {
+    "/v1/decisions": {
+      "post": {
+        "operationId": "submitDecision",
+        "summary": "Submit a decision for asynchronous quorum execution.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitDecisionRequestV1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An identical request was already submitted; the existing decision (in whatever state it has reached) is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionStatusResponseV1"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "A new decision was created and is PENDING.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionStatusResponseV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request failed schema validation, or named an unknown verification profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The token lacks the decision:submit role, or input.tenantId conflicts with the authenticated tenant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The referenced policy is not registered.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The referenced policy is registered but not ACTIVE.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "The request body, or input specifically, exceeds the configured size limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decisions/{decisionId}": {
+      "get": {
+        "operationId": "getDecision",
+        "summary": "Fetch the current status of a previously submitted decision.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "decisionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The decision, in whatever state it has reached.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionStatusResponseV1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No decision with this id exists for the authenticated tenant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decisions/{decisionId}/receipt": {
+      "get": {
+        "operationId": "getDecisionReceipt",
+        "summary": "Fetch the raw DecisionReceiptV1 for a FINALIZED decision, for offline verification with @ddn/receipt-sdk.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "decisionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The raw DecisionReceiptV1 (see @ddn/receipt-sdk) -- never trust this alone; verify it locally.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No decision with this id exists for the authenticated tenant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The decision has not reached FINALIZED, so no receipt exists yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decisions/{decisionId}/anchor": {
+      "get": {
+        "operationId": "getDecisionAnchor",
+        "summary": "Fetch the AnchorRecordV1 proving a FINALIZED decision's receipt was anchored on-chain, for offline verification with @ddn/receipt-sdk's verifyAnchoredDecisionReceipt.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "decisionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The AnchorRecordV1 -- never trust this alone; verify it locally against a trusted chain reader.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAnchorResponseV1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No decision with this id exists for the authenticated tenant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The decision has not yet been anchored on-chain (anchoring is decoupled from FINALIZED, and is optional infrastructure -- see ADR-001).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decisions/{decisionId}/validators": {
+      "get": {
+        "operationId": "getDecisionValidatorProgress",
+        "summary": "Fetch real per-validator subprocess progress for a decision (Milestone 7) -- for a live status view, never a substitute for the receipt itself.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "decisionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Per-validator phase/timestamp/outputHash. An empty validators array means the decision has not started running validators yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidatorProgressResponseV1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No decision with this id exists for the authenticated tenant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/receipts/verify": {
+      "post": {
+        "operationId": "verifyReceipt",
+        "summary": "Server-side convenience re-check of a DecisionReceiptV1 -- never a substitute for local verification.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyReceiptRequestV1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The verification result, whether or not the receipt was valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyReceiptResponseV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request failed schema validation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/policies": {
+      "get": {
+        "operationId": "listPolicies",
+        "summary": "List every registered policy and its current hashes/status.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The registered policies.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyListResponseV1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/policies/{policyId}/{policyVersion}": {
+      "get": {
+        "operationId": "getPolicy",
+        "summary": "Fetch one registered policy, including its input/output JSON Schemas and closed reason-code list.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "policyVersion",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The policy detail.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyDetailResponseV1"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid service token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No policy registered for this (policyId, policyVersion) pair.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "operationId": "getHealth",
+        "summary": "Liveness check. No auth required.",
+        "responses": {
+          "200": {
+            "description": "The service is up.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "const": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "SubmitDecisionRequestV1": {
+        "title": "SubmitDecisionRequestV1",
+        "description": "POST /v1/decisions request body. `input` is intentionally not validated against negotiation-input-v1.schema.json here: tenantId may be omitted (the API injects the authenticated tenantId before that stricter check runs) -- see docs/api-v1.md.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "policy",
+          "input",
+          "verificationProfileId"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "policy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "policyId",
+              "policyVersion"
+            ],
+            "properties": {
+              "policyId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "policyVersion": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 32
+              }
+            }
+          },
+          "input": {
+            "type": "object"
+          },
+          "verificationProfileId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        }
+      },
+      "DecisionStatusResponseV1": {
+        "title": "DecisionStatusResponseV1",
+        "description": "200 response body for GET /v1/decisions/{decisionId}. One of PENDING/RUNNING (in flight), FINALIZED (quorum reached, receipt available), or NO_QUORUM/FAILED (terminal error).",
+        "oneOf": [
+          {
+            "$ref": "#/definitions/pendingOrRunning"
+          },
+          {
+            "$ref": "#/definitions/finalized"
+          },
+          {
+            "$ref": "#/definitions/errorStatus"
+          }
+        ],
+        "definitions": {
+          "pendingOrRunning": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "schemaVersion",
+              "decisionId",
+              "status",
+              "submittedAt",
+              "updatedAt"
+            ],
+            "properties": {
+              "schemaVersion": {
+                "const": "1.0.0"
+              },
+              "decisionId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "PENDING",
+                  "RUNNING"
+                ]
+              },
+              "submittedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "finalized": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "schemaVersion",
+              "decisionId",
+              "status",
+              "result",
+              "verification",
+              "submittedAt",
+              "finalizedAt"
+            ],
+            "properties": {
+              "schemaVersion": {
+                "const": "1.0.0"
+              },
+              "decisionId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "const": "FINALIZED"
+              },
+              "result": {
+                "type": "object"
+              },
+              "verification": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "receiptId",
+                  "validatorSetId",
+                  "matchingValidators",
+                  "requiredQuorum",
+                  "policyHash",
+                  "profileHash",
+                  "inputHash",
+                  "outputHash",
+                  "executionHash"
+                ],
+                "properties": {
+                  "receiptId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "validatorSetId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "matchingValidators": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "requiredQuorum": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "policyHash": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "profileHash": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "inputHash": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "outputHash": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "executionHash": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "submittedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "finalizedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "errorStatus": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "schemaVersion",
+              "decisionId",
+              "status",
+              "error",
+              "submittedAt",
+              "updatedAt"
+            ],
+            "properties": {
+              "schemaVersion": {
+                "const": "1.0.0"
+              },
+              "decisionId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "NO_QUORUM",
+                  "FAILED"
+                ]
+              },
+              "error": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "message": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "submittedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      },
+      "VerifyReceiptRequestV1": {
+        "title": "VerifyReceiptRequestV1",
+        "description": "POST /v1/receipts/verify request body. `receipt` is intentionally untyped here -- it is validated structurally by @ddn/receipt-sdk's own DecisionReceiptV1 parser, not re-specified as a second parallel schema.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "receipt"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "receipt": {}
+        }
+      },
+      "VerifyReceiptResponseV1": {
+        "title": "VerifyReceiptResponseV1",
+        "description": "200 response body for POST /v1/receipts/verify. This is a convenience server-side re-check using the same @ddn/receipt-sdk verification an external client can run locally -- it is never the client's sole basis for trust, see docs/api-v1.md.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "status",
+          "checks"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "status": {
+            "enum": [
+              "VALID",
+              "INVALID"
+            ]
+          },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "passed"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "passed": {
+                  "type": "boolean"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "receiptId": {
+            "type": "string"
+          }
+        }
+      },
+      "PolicyListResponseV1": {
+        "title": "PolicyListResponseV1",
+        "description": "200 response body for GET /v1/policies.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "policies"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "policyId",
+                "policyVersion",
+                "policyHash",
+                "profileHash",
+                "status"
+              ],
+              "properties": {
+                "policyId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "policyVersion": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "policyHash": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "profileHash": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "status": {
+                  "enum": [
+                    "ACTIVE",
+                    "INACTIVE"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "PolicyDetailResponseV1": {
+        "title": "PolicyDetailResponseV1",
+        "description": "200 response body for GET /v1/policies/{policyId}/{policyVersion}. inputSchema/outputSchema are the committed negotiation-input-v1/negotiation-output-v1 JSON Schemas, echoed back so an external client can validate its own input before ever calling POST /v1/decisions.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "policyId",
+          "policyVersion",
+          "policyHash",
+          "profileHash",
+          "status",
+          "inputSchema",
+          "outputSchema",
+          "reasonCodes"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "policyId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "policyVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "policyHash": {
+            "type": "string",
+            "minLength": 1
+          },
+          "profileHash": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          },
+          "inputSchema": {
+            "type": "object"
+          },
+          "outputSchema": {
+            "type": "object"
+          },
+          "reasonCodes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "GetAnchorResponseV1": {
+        "title": "GetAnchorResponseV1",
+        "description": "200 response body for GET /v1/decisions/{decisionId}/anchor. Only ever returned once the decision's receipt has actually been confirmed on-chain (anchor sidecar status CONFIRMED). An existing decision owned by the authenticated tenant whose anchor sidecar hasn't reached CONFIRMED yet -- ELIGIBLE/BATCHED/SUBMITTED/REORG_PENDING/ANCHOR_FAILED, or not yet FINALIZED at all -- responds 409 ANCHOR_NOT_AVAILABLE. An unknown decisionId, or one belonging to a different tenant, responds 404 DECISION_NOT_FOUND, identical in both cases so a caller can never distinguish 'not yours' from 'doesn't exist'. See docs/api-v1.md.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "receiptId",
+          "batchId",
+          "merkleRoot",
+          "proof",
+          "chain",
+          "confirmation"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "receiptId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "batchId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "merkleRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proof": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "leafHash",
+              "leafIndex",
+              "siblings",
+              "totalLeaves"
+            ],
+            "properties": {
+              "leafHash": {
+                "type": "string",
+                "minLength": 1
+              },
+              "leafIndex": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "siblings": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "totalLeaves": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "chain": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "chainId",
+              "contractAddress"
+            ],
+            "properties": {
+              "chainId": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "contractAddress": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "confirmation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "txHash",
+              "blockNumber",
+              "blockHash",
+              "confirmedAt"
+            ],
+            "properties": {
+              "txHash": {
+                "type": "string",
+                "minLength": 1
+              },
+              "blockNumber": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "blockHash": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confirmedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      },
+      "ValidatorProgressResponseV1": {
+        "title": "ValidatorProgressResponseV1",
+        "description": "200 response body for GET /v1/decisions/{decisionId}/validators (Milestone 7). Mirrors real per-validator subprocess lifecycle events, never a timer or a fabricated state -- see docs/public-demo-boundary.md. Carries only validatorId, phase, updatedAt, and (once available) the validated outputHash: never raw stdout/stderr, error detail, file paths, or key material. An empty validators array means the decision exists but hasn't started running validators yet (still PENDING).",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "decisionId",
+          "validators"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "decisionId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "validators": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "validatorId",
+                "phase",
+                "updatedAt"
+              ],
+              "properties": {
+                "validatorId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "phase": {
+                  "enum": [
+                    "PENDING",
+                    "RUNNING",
+                    "SUCCEEDED",
+                    "FAILED",
+                    "TIMED_OUT"
+                  ]
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "outputHash": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "ApiErrorResponseV1": {
+        "title": "ApiErrorResponseV1",
+        "description": "The single error response shape used by every DDN API v1 endpoint on failure. See apps/api/src/errors/api-error.ts for the authoritative ApiErrorCode list -- kept in sync by hand, not generated, matching this repo's existing convention for enums shared between Rust/TS/JSON Schema.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "error"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": "1.0.0"
+          },
+          "error": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "message",
+              "requestId"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "message": {
+                "type": "string",
+                "minLength": 1
+              },
+              "requestId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "code"
+                  ],
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

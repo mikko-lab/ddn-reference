@@ -1,0 +1,18 @@
+[package]
+name = "ddn-negotiation-v1"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+ddn-canonical-json.workspace = true
+
+[dev-dependencies]
+proptest.workspace = true
+ddn-crypto.workspace = true

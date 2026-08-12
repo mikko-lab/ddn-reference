@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "policies": [
+    {
+      "policyId": "negotiation-v1",
+      "policyVersion": "1.0.0",
+      "policyPackagePath": "negotiation-v1/package",
+      "status": "ACTIVE"
+    }
+  ]
+}

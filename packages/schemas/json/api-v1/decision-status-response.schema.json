@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/api-v1/decision-status-response.schema.json",
+  "title": "DecisionStatusResponseV1",
+  "description": "200 response body for GET /v1/decisions/{decisionId}. One of PENDING/RUNNING (in flight), FINALIZED (quorum reached, receipt available), or NO_QUORUM/FAILED (terminal error).",
+  "oneOf": [
+    { "$ref": "#/definitions/pendingOrRunning" },
+    { "$ref": "#/definitions/finalized" },
+    { "$ref": "#/definitions/errorStatus" }
+  ],
+  "definitions": {
+    "pendingOrRunning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "decisionId", "status", "submittedAt", "updatedAt"],
+      "properties": {
+        "schemaVersion": { "const": "1.0.0" },
+        "decisionId": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PENDING", "RUNNING"] },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "finalized": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "decisionId", "status", "result", "verification", "submittedAt", "finalizedAt"],
+      "properties": {
+        "schemaVersion": { "const": "1.0.0" },
+        "decisionId": { "type": "string", "minLength": 1 },
+        "status": { "const": "FINALIZED" },
+        "result": { "type": "object" },
+        "verification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "receiptId", "validatorSetId", "matchingValidators", "requiredQuorum",
+            "policyHash", "profileHash", "inputHash", "outputHash", "executionHash"
+          ],
+          "properties": {
+            "receiptId": { "type": "string", "minLength": 1 },
+            "validatorSetId": { "type": "string", "minLength": 1 },
+            "matchingValidators": { "type": "integer", "minimum": 0 },
+            "requiredQuorum": { "type": "integer", "minimum": 1 },
+            "policyHash": { "type": "string", "minLength": 1 },
+            "profileHash": { "type": "string", "minLength": 1 },
+            "inputHash": { "type": "string", "minLength": 1 },
+            "outputHash": { "type": "string", "minLength": 1 },
+            "executionHash": { "type": "string", "minLength": 1 }
+          }
+        },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "finalizedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "errorStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "decisionId", "status", "error", "submittedAt", "updatedAt"],
+      "properties": {
+        "schemaVersion": { "const": "1.0.0" },
+        "decisionId": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["NO_QUORUM", "FAILED"] },
+        "error": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message"],
+          "properties": {
+            "code": { "type": "string", "minLength": 1 },
+            "message": { "type": "string", "minLength": 1 }
+          }
+        },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

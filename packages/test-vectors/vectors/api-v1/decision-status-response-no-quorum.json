@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "decisionId": "dec_golden_vector_2",
+  "status": "NO_QUORUM",
+  "error": {
+    "code": "NO_QUORUM",
+    "message": "insufficient matching validator results to reach quorum"
+  },
+  "submittedAt": "2026-08-03T00:00:00.000Z",
+  "updatedAt": "2026-08-03T00:00:01.000Z"
+}

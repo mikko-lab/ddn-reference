@@ -1,0 +1,36 @@
+{
+  "name": "@ddn/explorer",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "NEXT_TELEMETRY_DISABLED=1 next dev",
+    "build": "NEXT_TELEMETRY_DISABLED=1 next build",
+    "start": "NEXT_TELEMETRY_DISABLED=1 next start",
+    "lint": "eslint src e2e --max-warnings=0",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node -e \"require('node:fs').rmSync('dist-test',{recursive:true,force:true})\" && tsc -p tsconfig.test.json && printf '{\"type\":\"commonjs\"}' > dist-test/package.json && cd dist-test && node --test",
+    "test:a11y": "playwright test"
+  },
+  "dependencies": {
+    "@ddn/client-sdk": "workspace:*",
+    "@ddn/demo-trust-profile": "workspace:*",
+    "@ddn/demo-web-kit": "workspace:*",
+    "@ddn/receipt-sdk": "workspace:*",
+    "@ddn/receipt-ui": "workspace:*",
+    "@ddn/schemas": "workspace:*",
+    "next": "^16.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "typescript": "^5.7.2"
+  }
+}

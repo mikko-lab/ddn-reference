@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/api-v1/policy-detail-response.schema.json",
+  "title": "PolicyDetailResponseV1",
+  "description": "200 response body for GET /v1/policies/{policyId}/{policyVersion}. inputSchema/outputSchema are the committed negotiation-input-v1/negotiation-output-v1 JSON Schemas, echoed back so an external client can validate its own input before ever calling POST /v1/decisions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "policyId", "policyVersion", "policyHash", "profileHash",
+    "status", "inputSchema", "outputSchema", "reasonCodes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "policyId": { "type": "string", "minLength": 1 },
+    "policyVersion": { "type": "string", "minLength": 1 },
+    "policyHash": { "type": "string", "minLength": 1 },
+    "profileHash": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["ACTIVE", "INACTIVE"] },
+    "inputSchema": { "type": "object" },
+    "outputSchema": { "type": "object" },
+    "reasonCodes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

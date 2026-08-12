@@ -1,0 +1,370 @@
+# SPDX-License-Identifier: Apache-2.0
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  typescript:
+    name: TypeScript (build, lint, test, typecheck)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm run lint
+      - run: pnpm run test
+      - run: pnpm run typecheck
+      - name: OpenAPI document is up to date with the committed JSON Schemas
+        run: pnpm --filter @ddn/api run openapi:check
+      - name: Merkle V1 golden vectors are up to date with the committed implementation
+        run: pnpm --filter @ddn/receipt-sdk run vectors:check
+
+  rust:
+    name: Rust (build, test, clippy, fmt)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
+        with:
+          toolchain: 1.94.1
+          components: clippy, rustfmt
+      - uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+      - run: cargo build --workspace
+      # ddn-validator's tests need policies/negotiation-v1/package/ built
+      # first (WASM + manifest); the `wasm` job below builds that package
+      # and runs ddn-validator's tests separately.
+      - run: cargo test --workspace --exclude ddn-validator
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      - run: cargo fmt --all -- --check
+
+  wasm:
+    name: WASM build, runner, determinism
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ddn/schemas run build
+      - run: node scripts/gen-reason-codes.mjs
+      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
+        with:
+          toolchain: 1.94.1
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+      - run: ./scripts/build-policy.sh
+      # Excludes the golden_vectors test target deliberately: those tests
+      # compare live recomputation against committed hash values pinned to
+      # the release-locked linux/arm64 build (see docs/validator-result-v1.md
+      # and docs/reproducible-builds.md#reproducibility-is-per-architecture).
+      # This job's own build-policy.sh runs a plain, non-pinned build on
+      # this job's own (amd64) runner, which legitimately produces different
+      # policy.wasm bytes -- golden_vectors runs in the reproducibility-arm64
+      # job below instead, right after the actual release-locked package is
+      # rebuilt.
+      - name: Cross-language and native-vs-WASM vectors
+        run: |
+          cargo test -p ddn-validator --lib --bins
+          cargo test -p ddn-validator --test protocol_negative_tests
+          cargo test -p ddn-validator --test native_vs_wasm
+      - name: Build validator release binary
+        run: cargo build --release -p ddn-validator
+      - name: Determinism check (100 runs)
+        run: |
+          ./target/release/ddn-validator determinism-check \
+            --policy policies/negotiation-v1/package \
+            --input packages/test-vectors/fixtures/negotiation-counter.json \
+            --runs 100
+      - name: Two clean-environment replay (Docker)
+        run: ./scripts/validator-replay-two-environments.sh
+      # Proves the actual Milestone 4 acceptance chain, not just "TypeScript
+      # works" and "Rust works" separately: the TypeScript coordinator
+      # spawning the real Rust validator binary as three isolated
+      # subprocesses, reaching quorum, and producing an offline-verifiable
+      # DecisionReceiptV1. The generic `typescript` job's own test run
+      # deliberately skips this (no Rust binary/policy package built
+      # there) -- this is the one blocking job where it actually runs, not
+      # skips. See docs/decision-receipt-v1.md.
+      - name: Build @ddn/coordinator and its workspace dependencies
+        run: pnpm --filter @ddn/coordinator... run build
+      - name: Run coordinator subprocess integration tests
+        env:
+          DDN_VALIDATOR_BIN: ${{ github.workspace }}/target/release/ddn-validator
+          DDN_POLICY_PACKAGE: ${{ github.workspace }}/policies/negotiation-v1/package
+        run: pnpm --filter @ddn/coordinator run test:integration
+      # Proves the actual Milestone 5 acceptance chain: apps/api's decision
+      # runner driving three real validator subprocesses to FINALIZED/
+      # NO_QUORUM, and -- the whole point of this milestone -- an external
+      # client using only the published @ddn/client-sdk over a real TCP
+      # connection, verifying the receipt itself with @ddn/receipt-sdk
+      # rather than trusting the server's FINALIZED claim. Same
+      # never-silently-skip discipline as the coordinator step above.
+      - name: Build @ddn/api and its workspace dependencies
+        run: pnpm --filter @ddn/api... run build
+      - name: Run apps/api decision-runner and external-client E2E integration tests
+        env:
+          DDN_VALIDATOR_BIN: ${{ github.workspace }}/target/release/ddn-validator
+          DDN_POLICY_PACKAGE: ${{ github.workspace }}/policies/negotiation-v1/package
+        run: pnpm --filter @ddn/api run test:integration
+
+  reproducibility-arm64:
+    # The release reproducibility guarantee applies to the pinned
+    # linux/arm64 build profile (toolchain.releaseBuildArchitecture in
+    # packages/config/profiles/ddn-wasm-v1.json). This job is the blocking
+    # release gate: it re-verifies and refreshes that profile on every run.
+    # See docs/reproducible-builds.md.
+    name: Reproducible release build (linux/arm64)
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ddn/schemas run build
+      - run: node scripts/gen-reason-codes.mjs
+      - run: ./scripts/policy-reproducibility.sh
+      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
+        with:
+          toolchain: 1.94.1
+      - uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+      - name: Golden protocol vectors (pinned to this release-locked package)
+        run: cargo test -p ddn-validator --test golden_vectors
+
+  cross-architecture-amd64:
+    # NOT the release gate. amd64 does not match the locked
+    # releaseBuildArchitecture (linux/arm64), so
+    # scripts/policy-reproducibility.sh treats a mismatch as a
+    # cross-architecture validation and does not overwrite policy.wasm,
+    # manifest.json, or the profile either way.
+    #
+    # Explicitly experimental and non-blocking (continue-on-error: true):
+    # native amd64 currently fails nondeterministically with SIGSEGV in
+    # host build-script binaries (proc-macro2, serde_json, ...) -- real,
+    # reproduced on this native GitHub-hosted amd64 runner AND under QEMU,
+    # root cause not yet confirmed (a fork()/exec() interaction in the
+    # musl cross-toolchain setup is suspected, not proven). See
+    # docs/reproducible-builds.md and the tracked investigation issue:
+    # the separately tracked amd64 investigation
+    # This job does not gate merging; on failure it uploads diagnostics
+    # (not full rebuild loops or core dumps) for that investigation.
+    name: Experimental cross-architecture validation (linux/amd64, non-blocking)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ddn/schemas run build
+      - run: node scripts/gen-reason-codes.mjs
+      - run: ./scripts/policy-reproducibility.sh
+      - name: Collect diagnostics (failure only)
+        if: failure()
+        run: ./scripts/diagnose-amd64-crash.sh
+      - name: Upload diagnostics (failure only)
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: amd64-crash-diagnostics
+          path: /tmp/amd64-diagnostics/
+          retention-days: 14
+
+  accessibility:
+    # Axe-core accessibility scans of apps/explorer
+    # and apps/demo-negotiation-reference, driven by real Playwright browser sessions
+    # against a real `next build && next start` production server (see
+    # each app's playwright.config.ts) -- not a mock DOM. `playwright
+    # install --with-deps chromium` here is deliberate and required: if
+    # the browser were ever missing, `playwright test` fails loudly with a
+    # clear "Executable doesn't exist" error and a non-zero exit code
+    # rather than silently skipping (verified by hand), same
+    # never-silently-skip discipline as the coordinator/api/anchor
+    # integration steps in the other jobs in this file. These scans cover
+    # every page's real, reachable states (home/empty, form-validation
+    # errors, login success/failure, and an unreachable-upstream error
+    # state for the client/BFF-polling pages) without needing a live DDN
+    # API -- the full real validator/Anvil/receipt/anchor flow is covered
+    # by the separate blocking E2E job, not this one.
+    name: Accessibility (axe-core + Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # `pnpm exec` at the repo root doesn't find `playwright`: it isn't a
+      # root devDependency, and pnpm does not hoist workspace-member bins
+      # to the root node_modules/.bin the way it hoists some other tools
+      # (confirmed the hard way: "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL
+      # Command "playwright" not found" on a real CI run). @ddn/explorer
+      # has @playwright/test as its own devDependency, so scope to it --
+      # the installed browser binary is cached under a shared, non-
+      # package-specific path (~/.cache/ms-playwright by default) and is
+      # equally usable by @ddn/demo-negotiation-reference's own test:a11y run below.
+      - run: pnpm --filter @ddn/explorer exec playwright install --with-deps chromium
+      - name: Build apps/explorer and its workspace dependencies
+        run: pnpm --filter @ddn/explorer... run build
+      - name: Build apps/demo-negotiation-reference and its workspace dependencies
+        run: pnpm --filter @ddn/demo-negotiation-reference... run build
+      - name: apps/explorer accessibility scan
+        run: pnpm --filter @ddn/explorer run test:a11y
+      - name: apps/demo-negotiation-reference accessibility scan
+        run: pnpm --filter @ddn/demo-negotiation-reference run test:a11y
+      - name: Upload Playwright report (failure only)
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: playwright-report
+          path: |
+            apps/explorer/playwright-report/
+            apps/demo-negotiation-reference/playwright-report/
+          retention-days: 14
+
+  contracts:
+    name: Solidity (build, test, fmt)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@908c540300062bd5a7e473851cdb4282204cee09 # v1
+        with:
+          version: v1.7.1
+      - working-directory: contracts
+        run: forge build
+      - working-directory: contracts
+        run: forge test
+      - name: Gas report (recorded, not gated -- a baseline for later milestones to diff against)
+        working-directory: contracts
+        run: forge test --gas-report
+      - working-directory: contracts
+        run: forge fmt --check
+      # Proves @ddn/anchor-service's chain-boundary code (bytes32
+      # conversion, ABI encoding, event log parsing, the
+      # BatchAlreadyAnchored idempotent-retry path) against the real
+      # DecisionAnchor.sol bytecode just built above, on a real local
+      # Anvil node -- this job is the one place anvil is actually
+      # installed. DDN_ANCHOR_TEST_ANVIL makes a missing prerequisite fail
+      # loudly here rather than silently skip, same discipline as the
+      # coordinator/api integration steps in the `wasm` job.
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build @ddn/anchor-service and its workspace dependencies
+        run: pnpm --filter @ddn/anchor-service... run build
+      - name: Run @ddn/anchor-service Anvil integration tests
+        env:
+          DDN_ANCHOR_TEST_ANVIL: '1'
+        run: pnpm --filter @ddn/anchor-service run test:integration
+      # Milestone 7: TrustedDemoProfileV1's committed contractAddress is only
+      # honest if a fresh Anvil + this exact deploy path really reproduces
+      # it -- same DDN_ANCHOR_TEST_ANVIL fail-loud discipline as above.
+      - name: Build @ddn/demo-trust-profile and its workspace dependencies
+        run: pnpm --filter @ddn/demo-trust-profile... run build
+      - name: Check TrustedDemoProfileV1 is up to date with a real Anvil deploy
+        env:
+          DDN_ANCHOR_TEST_ANVIL: '1'
+        run: pnpm --filter @ddn/demo-trust-profile run profile:check
+      - name: Run @ddn/demo-trust-profile Anvil integration tests
+        env:
+          DDN_ANCHOR_TEST_ANVIL: '1'
+        run: pnpm --filter @ddn/demo-trust-profile run test:integration
+
+  real-e2e:
+    # Real, no-mocks browser <-> API <->
+    # validators <-> receipt <-> anchoring E2E (@ddn/e2e). Blocking, not
+    # optional and not continue-on-error -- this is the one job that
+    # proves the entire acceptance chain together, in a real browser,
+    # rather than each piece separately (the `wasm`/`contracts` jobs
+    # above prove the validator/coordinator/anchor-service pieces in
+    # isolation; this job is what actually submits a real offer through
+    # a real apps/demo-negotiation-reference page and watches it reach a real
+    # anchored decision whose receipt is independently verified in the
+    # browser). Every prerequisite this job
+    # builds is real: the actual ddn-validator release binary running the
+    # actual pinned WASM policy, a real forge-built DecisionAnchor.sol,
+    # and apps/explorer + apps/demo-negotiation-reference as real `next build && next
+    # start` production servers -- see e2e/src/run-e2e.ts and
+    # e2e/src/preflight.ts, which throw a specific, actionable error
+    # (not a skip) for whichever prerequisite is missing. This job
+    # self-sufficiently rebuilds every prerequisite itself, matching the
+    # `wasm`/`contracts` jobs' own "no job depends on another job's
+    # build artifacts" convention.
+    name: Real E2E (browser + API + validators + receipt + Anvil anchoring)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          submodules: recursive
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ddn/schemas run build
+      - run: node scripts/gen-reason-codes.mjs
+      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
+        with:
+          toolchain: 1.94.1
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+      - name: Build the real WASM policy package
+        run: ./scripts/build-policy.sh
+      - name: Build the real ddn-validator release binary
+        run: cargo build --release -p ddn-validator
+      - uses: foundry-rs/foundry-toolchain@908c540300062bd5a7e473851cdb4282204cee09 # v1
+        with:
+          version: v1.7.1
+      - name: Build the real DecisionAnchor.sol contract artifact
+        working-directory: contracts
+        run: forge build
+      - name: Build every workspace package and app (includes @ddn/e2e, apps/api, apps/explorer, apps/demo-negotiation-reference)
+        run: pnpm run build
+      # If the browser were ever missing, `playwright test` fails loudly
+      # with a clear "Executable doesn't exist" error and a non-zero exit
+      # code rather than silently skipping (verified by hand during
+      # local development of this suite) -- same never-silently-skip
+      # discipline as every other real-infra step in this file.
+      #
+      # `pnpm exec` at the repo root doesn't find `playwright` (it isn't a
+      # root devDependency and pnpm doesn't hoist workspace-member bins to
+      # the root .bin the way it hoists some other tools) -- confirmed the
+      # hard way on a real CI run ("ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL
+      # Command "playwright" not found"). @ddn/e2e has @playwright/test as
+      # its own devDependency, so scope to it.
+      - run: pnpm --filter @ddn/e2e exec playwright install --with-deps chromium
+      - name: Run the real E2E chain (builds+boots Anvil, apps/api, apps/explorer, apps/demo-negotiation-reference, then drives a real browser through the whole flow)
+        run: pnpm --filter @ddn/e2e run test:e2e
+      - name: Upload Playwright trace/screenshots (failure only)
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: real-e2e-playwright-report
+          path: |
+            e2e/test-results/
+            e2e/playwright-report/
+          retention-days: 14

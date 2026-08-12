@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0.0",
+  "policies": [
+    {
+      "policyId": "negotiation-v1",
+      "policyVersion": "1.0.0",
+      "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+      "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+      "status": "ACTIVE"
+    }
+  ]
+}

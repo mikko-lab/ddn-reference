@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/validator-result-v1.schema.json",
+  "title": "ValidatorResultV1",
+  "description": "The outcome of a validator executing an ExecutionRequestV1. Deliberately excludes any timestamp, nonce, validator name/hostname, or runtime metadata: executionHash must be a pure function of policyHash/profileHash/inputHash/outputHash so replay verification can recompute it independently and get the identical value. See docs/validator-result-v1.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "validatorId",
+    "policyHash",
+    "profileHash",
+    "manifestHash",
+    "inputHash",
+    "output",
+    "outputHash",
+    "executionHash",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "requestId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "validatorId": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "policyHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "profileHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "manifestHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "inputHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "output": {
+      "type": "object"
+    },
+    "outputHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "executionHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": ["SUCCESS", "ERROR"]
+    }
+  }
+}

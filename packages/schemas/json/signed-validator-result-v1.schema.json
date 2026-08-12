@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/signed-validator-result-v1.schema.json",
+  "title": "SignedValidatorResultV1",
+  "description": "An Ed25519-signed ValidatorResultV1. The signature is computed over the canonical JSON bytes of the domain-separated envelope { domain: \"DDN_VALIDATOR_RESULT_V1\", value: result } -- not over a hash of it. See docs/validator-result-v1.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["result", "validatorPublicKey", "signatureAlgorithm", "signature"],
+  "properties": {
+    "result": {
+      "$ref": "https://ddn.mikko-lab.dev/schemas/validator-result-v1.schema.json"
+    },
+    "validatorPublicKey": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "signatureAlgorithm": {
+      "const": "ed25519"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{128}$"
+    }
+  }
+}

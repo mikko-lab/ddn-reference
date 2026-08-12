@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/api-v1/submit-decision-request.schema.json",
+  "title": "SubmitDecisionRequestV1",
+  "description": "POST /v1/decisions request body. `input` is intentionally not validated against negotiation-input-v1.schema.json here: tenantId may be omitted (the API injects the authenticated tenantId before that stricter check runs) -- see docs/api-v1.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "policy", "input", "verificationProfileId"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policyId", "policyVersion"],
+      "properties": {
+        "policyId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "policyVersion": { "type": "string", "minLength": 1, "maxLength": 32 }
+      }
+    },
+    "input": { "type": "object" },
+    "verificationProfileId": { "type": "string", "minLength": 1, "maxLength": 64 }
+  }
+}

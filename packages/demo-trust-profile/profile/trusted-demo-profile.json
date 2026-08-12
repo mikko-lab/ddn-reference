@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "validatorSet": {
+    "schemaVersion": "1.0.0",
+    "threshold": 2,
+    "validators": [
+      {
+        "validatorId": "sha256:dddf9a0dd07236d2a334e0f168eb36a1915a168401a0f6daae985953f0db7e70",
+        "publicKey": "584e35e50cad971fc3f931bf3d8dd969a8e5604cd130c5eb7d7079378fea2c84",
+        "signatureAlgorithm": "ed25519"
+      },
+      {
+        "validatorId": "sha256:df47313c9642bac6283a329bb9c8461795caf01851bfc3a0dc3ff389bc193860",
+        "publicKey": "9b66e37709ee1d808cc93e000452e6e780a10578866658ca363cc9399dd21aed",
+        "signatureAlgorithm": "ed25519"
+      },
+      {
+        "validatorId": "sha256:e80f6bdb4129ea1dcc8566ae4b3a2501c26c65a15e79c07b6ad741f41abab6e0",
+        "publicKey": "a75e1e0de58b51237b869bcb871251f8f80d330dbb65c040b4f20b568761fbbd",
+        "signatureAlgorithm": "ed25519"
+      }
+    ],
+    "validatorSetId": "sha256:8bcdbea6e2c8f650fc0cff0d719531bcc23eb6ee1c8ba9167ed106ee9135bbfa"
+  },
+  "chain": {
+    "chainId": 31337,
+    "contractAddress": "0x5fbdb2315678afecb367f032d93f642f64180aa3"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "1.0.0",
+  "error": {
+    "code": "TENANT_MISMATCH",
+    "message": "input.tenantId does not match the authenticated tenant",
+    "requestId": "req_golden_vector_1"
+  }
+}

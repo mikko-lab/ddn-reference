@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "crates.io version API; checksums matched to Cargo.lock",
+  "cargo": [
+    {
+      "name": "anstyle-wincon",
+      "version": "3.0.11",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "291e6a250ff86cd4a820112fb8898808a366d8f9f58ce16d1f538353ad55747d",
+      "evidence": "https://crates.io/api/v1/crates/anstyle-wincon/3.0.11"
+    },
+    {
+      "name": "ar_archive_writer",
+      "version": "0.5.3",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "checksum": "73cd58deff2140a0a8eae87e417bd01db68a33e148aa93d1e8cd837e55e312b6",
+      "evidence": "https://crates.io/api/v1/crates/ar_archive_writer/0.5.3"
+    },
+    {
+      "name": "arbitrary",
+      "version": "1.4.2",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "c3d036a3c4ab069c7b410a2ce876bd74808d2d0888a82667669f8e783a898bf1",
+      "evidence": "https://crates.io/api/v1/crates/arbitrary/1.4.2"
+    },
+    {
+      "name": "bumpalo",
+      "version": "3.20.3",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "72f5acc6cb2ba439de613abc23857ec3d78374d8ed5ac84e9d11336e87da8649",
+      "evidence": "https://crates.io/api/v1/crates/bumpalo/3.20.3"
+    },
+    {
+      "name": "cranelift-control",
+      "version": "0.114.0",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "checksum": "29cb4018f5bf59fb53f515fa9d80e6f8c5ce19f198dc538984ebd23ecf8965ec",
+      "evidence": "https://crates.io/api/v1/crates/cranelift-control/0.114.0"
+    },
+    {
+      "name": "curve25519-dalek-derive",
+      "version": "0.1.1",
+      "license": "MIT/Apache-2.0",
+      "checksum": "f46882e17999c6cc590af592290432be3bce0428cb0d5f8b6715e4dc7b383eb3",
+      "evidence": "https://crates.io/api/v1/crates/curve25519-dalek-derive/0.1.1"
+    },
+    {
+      "name": "fiat-crypto",
+      "version": "0.2.9",
+      "license": "MIT OR Apache-2.0 OR BSD-1-Clause",
+      "checksum": "28dea519a9695b9977216879a3ebfddf92f1c08c05d984f8996aecd6ecdc811d",
+      "evidence": "https://crates.io/api/v1/crates/fiat-crypto/0.2.9"
+    },
+    {
+      "name": "generic-array",
+      "version": "0.14.7",
+      "license": "MIT",
+      "checksum": "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a",
+      "evidence": "https://crates.io/api/v1/crates/generic-array/0.14.7"
+    },
+    {
+      "name": "heck",
+      "version": "0.5.0",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea",
+      "evidence": "https://crates.io/api/v1/crates/heck/0.5.0"
+    },
+    {
+      "name": "id-arena",
+      "version": "2.3.0",
+      "license": "MIT/Apache-2.0",
+      "checksum": "3d3067d79b975e8844ca9eb072e16b31c3c1c36928edf9c6789548c524d0d954",
+      "evidence": "https://crates.io/api/v1/crates/id-arena/2.3.0"
+    },
+    {
+      "name": "itertools",
+      "version": "0.12.1",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569",
+      "evidence": "https://crates.io/api/v1/crates/itertools/0.12.1"
+    },
+    {
+      "name": "leb128",
+      "version": "0.2.7",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "c83bff1d572d6b9aeef67ddfc8448e4a3737909cb28e81f97c791b9018703e52",
+      "evidence": "https://crates.io/api/v1/crates/leb128/0.2.7"
+    },
+    {
+      "name": "linux-raw-sys",
+      "version": "0.4.15",
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "checksum": "d26c52dbd32dccf2d10cac7725f8eae5296885fb5703b261f7d0a0739ec807ab",
+      "evidence": "https://crates.io/api/v1/crates/linux-raw-sys/0.4.15"
+    },
+    {
+      "name": "linux-raw-sys",
+      "version": "0.12.1",
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "checksum": "32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53",
+      "evidence": "https://crates.io/api/v1/crates/linux-raw-sys/0.12.1"
+    },
+    {
+      "name": "memchr",
+      "version": "2.8.3",
+      "license": "Unlicense OR MIT",
+      "checksum": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98",
+      "evidence": "https://crates.io/api/v1/crates/memchr/2.8.3"
+    },
+    {
+      "name": "memfd",
+      "version": "0.6.5",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "ad38eb12aea514a0466ea40a80fd8cc83637065948eb4a426e4aa46261175227",
+      "evidence": "https://crates.io/api/v1/crates/memfd/0.6.5"
+    },
+    {
+      "name": "object",
+      "version": "0.39.1",
+      "license": "Apache-2.0 OR MIT",
+      "checksum": "2e5a6c098c7a3b6547378093f5cc30bc54fd361ce711e05293a5cc589562739b",
+      "evidence": "https://crates.io/api/v1/crates/object/0.39.1"
+    },
+    {
+      "name": "once_cell",
+      "version": "1.21.4",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50",
+      "evidence": "https://crates.io/api/v1/crates/once_cell/1.21.4"
+    },
+    {
+      "name": "once_cell_polyfill",
+      "version": "1.70.2",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "384b8ab6d37215f3c5301a95a4accb5d64aa607f1fcb26a11b5303878451b4fe",
+      "evidence": "https://crates.io/api/v1/crates/once_cell_polyfill/1.70.2"
+    },
+    {
+      "name": "proptest",
+      "version": "1.11.0",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "4b45fcc2344c680f5025fe57779faef368840d0bd1f42f216291f0dc4ace4744",
+      "evidence": "https://crates.io/api/v1/crates/proptest/1.11.0"
+    },
+    {
+      "name": "psm",
+      "version": "0.1.31",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "645dbe486e346d9b5de3ef16ede18c26e6c70ad97418f4874b8b1889d6e761ea",
+      "evidence": "https://crates.io/api/v1/crates/psm/0.1.31"
+    },
+    {
+      "name": "quick-error",
+      "version": "1.2.3",
+      "license": "MIT/Apache-2.0",
+      "checksum": "a1d01941d82fa2ab50be1e79e6714289dd7cde78eba4c074bc5a4374f650dfe0",
+      "evidence": "https://crates.io/api/v1/crates/quick-error/1.2.3"
+    },
+    {
+      "name": "r-efi",
+      "version": "5.3.0",
+      "license": "MIT OR Apache-2.0 OR LGPL-2.1-or-later",
+      "checksum": "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f",
+      "evidence": "https://crates.io/api/v1/crates/r-efi/5.3.0"
+    },
+    {
+      "name": "r-efi",
+      "version": "6.0.0",
+      "license": "MIT OR Apache-2.0 OR LGPL-2.1-or-later",
+      "checksum": "f8dcc9c7d52a811697d2151c701e0d08956f92b0e24136cf4cf27b57a6a0d9bf",
+      "evidence": "https://crates.io/api/v1/crates/r-efi/6.0.0"
+    },
+    {
+      "name": "regalloc2",
+      "version": "0.10.2",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "checksum": "12908dbeb234370af84d0579b9f68258a0f67e201412dd9a2814e6f45b2fc0f0",
+      "evidence": "https://crates.io/api/v1/crates/regalloc2/0.10.2"
+    },
+    {
+      "name": "regex-syntax",
+      "version": "0.8.11",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4",
+      "evidence": "https://crates.io/api/v1/crates/regex-syntax/0.8.11"
+    },
+    {
+      "name": "serde",
+      "version": "1.0.229",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba",
+      "evidence": "https://crates.io/api/v1/crates/serde/1.0.229"
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.229",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48",
+      "evidence": "https://crates.io/api/v1/crates/serde_core/1.0.229"
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.229",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348",
+      "evidence": "https://crates.io/api/v1/crates/serde_derive/1.0.229"
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.151",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "c841b55ecdae098c80dcae9cf767f6f8a0c2cdb3416bbef72181df4d0fe73f14",
+      "evidence": "https://crates.io/api/v1/crates/serde_json/1.0.151"
+    },
+    {
+      "name": "shlex",
+      "version": "2.0.1",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba",
+      "evidence": "https://crates.io/api/v1/crates/shlex/2.0.1"
+    },
+    {
+      "name": "smallvec",
+      "version": "1.15.2",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "8ed6a63f02c8539c91a8685a86f4099661ba3da017932f6ebbea6de3f0fa7c90",
+      "evidence": "https://crates.io/api/v1/crates/smallvec/1.15.2"
+    },
+    {
+      "name": "strsim",
+      "version": "0.11.1",
+      "license": "MIT",
+      "checksum": "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f",
+      "evidence": "https://crates.io/api/v1/crates/strsim/0.11.1"
+    },
+    {
+      "name": "target-lexicon",
+      "version": "0.12.16",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "checksum": "61c41af27dd6d1e27b1b16b489db798443478cef1f06a660c96db617ba5de3b1",
+      "evidence": "https://crates.io/api/v1/crates/target-lexicon/0.12.16"
+    },
+    {
+      "name": "unarray",
+      "version": "0.1.4",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "eaea85b334db583fe3274d12b4cd1880032beab409c0d774be044d4480ab9a94",
+      "evidence": "https://crates.io/api/v1/crates/unarray/0.1.4"
+    },
+    {
+      "name": "unicode-xid",
+      "version": "0.2.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "ebc1c04c71510c7f702b52b7c350734c9ff1295c464a03335b00bb84fc54f853",
+      "evidence": "https://crates.io/api/v1/crates/unicode-xid/0.2.6"
+    },
+    {
+      "name": "version_check",
+      "version": "0.9.5",
+      "license": "MIT/Apache-2.0",
+      "checksum": "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a",
+      "evidence": "https://crates.io/api/v1/crates/version_check/0.9.5"
+    },
+    {
+      "name": "wasi",
+      "version": "0.11.1+wasi-snapshot-preview1",
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "checksum": "ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b",
+      "evidence": "https://crates.io/api/v1/crates/wasi/0.11.1%2Bwasi-snapshot-preview1"
+    },
+    {
+      "name": "wasip2",
+      "version": "1.0.4+wasi-0.2.12",
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "checksum": "b67efb37e106e55ce722a510d6b5f9c17f083e5fc79afc2badeb12cc313d9487",
+      "evidence": "https://crates.io/api/v1/crates/wasip2/1.0.4%2Bwasi-0.2.12"
+    },
+    {
+      "name": "wasm-encoder",
+      "version": "0.219.2",
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "checksum": "8aa79bcd666a043b58f5fa62b221b0b914dd901e6f620e8ab7371057a797f3e1",
+      "evidence": "https://crates.io/api/v1/crates/wasm-encoder/0.219.2"
+    },
+    {
+      "name": "wasmparser",
+      "version": "0.219.2",
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "checksum": "5220ee4c6ffcc0cb9d7c47398052203bc902c8ef3985b0c8134118440c0b2921",
+      "evidence": "https://crates.io/api/v1/crates/wasmparser/0.219.2"
+    },
+    {
+      "name": "winapi-util",
+      "version": "0.1.11",
+      "license": "Unlicense OR MIT",
+      "checksum": "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22",
+      "evidence": "https://crates.io/api/v1/crates/winapi-util/0.1.11"
+    },
+    {
+      "name": "windows-link",
+      "version": "0.2.1",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5",
+      "evidence": "https://crates.io/api/v1/crates/windows-link/0.2.1"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.59.0",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "1e38bc4d79ed67fd075bcc251a1c39b32a1776bbe92e5bef1f0bf1f8c531853b",
+      "evidence": "https://crates.io/api/v1/crates/windows-sys/0.59.0"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.61.2",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc",
+      "evidence": "https://crates.io/api/v1/crates/windows-sys/0.61.2"
+    },
+    {
+      "name": "windows-targets",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "9b724f72796e036ab90c1021d4780d4d3d648aca59e491e6b98e725b84e99973",
+      "evidence": "https://crates.io/api/v1/crates/windows-targets/0.52.6"
+    },
+    {
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "32a4622180e7a0ec044bb555404c800bc9fd9ec262ec147edd5989ccd0c02cd3",
+      "evidence": "https://crates.io/api/v1/crates/windows_aarch64_gnullvm/0.52.6"
+    },
+    {
+      "name": "windows_aarch64_msvc",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "09ec2a7bb152e2252b53fa7803150007879548bc709c039df7627cabbd05d469",
+      "evidence": "https://crates.io/api/v1/crates/windows_aarch64_msvc/0.52.6"
+    },
+    {
+      "name": "windows_i686_gnu",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "8e9b5ad5ab802e97eb8e295ac6720e509ee4c243f69d781394014ebfe8bbfa0b",
+      "evidence": "https://crates.io/api/v1/crates/windows_i686_gnu/0.52.6"
+    },
+    {
+      "name": "windows_i686_gnullvm",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "0eee52d38c090b3caa76c563b86c3a4bd71ef1a819287c19d586d7334ae8ed66",
+      "evidence": "https://crates.io/api/v1/crates/windows_i686_gnullvm/0.52.6"
+    },
+    {
+      "name": "windows_i686_msvc",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "240948bc05c5e7c6dabba28bf89d89ffce3e303022809e73deaefe4f6ec56c66",
+      "evidence": "https://crates.io/api/v1/crates/windows_i686_msvc/0.52.6"
+    },
+    {
+      "name": "windows_x86_64_gnu",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "147a5c80aabfbf0c7d901cb5895d1de30ef2907eb21fbbab29ca94c5b08b1a78",
+      "evidence": "https://crates.io/api/v1/crates/windows_x86_64_gnu/0.52.6"
+    },
+    {
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "24d5b23dc417412679681396f2b49f3de8c1473deb516bd34410872eff51ed0d",
+      "evidence": "https://crates.io/api/v1/crates/windows_x86_64_gnullvm/0.52.6"
+    },
+    {
+      "name": "windows_x86_64_msvc",
+      "version": "0.52.6",
+      "license": "MIT OR Apache-2.0",
+      "checksum": "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec",
+      "evidence": "https://crates.io/api/v1/crates/windows_x86_64_msvc/0.52.6"
+    },
+    {
+      "name": "wit-bindgen",
+      "version": "0.57.1",
+      "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "checksum": "1ebf944e87a7c253233ad6766e082e3cd714b5d03812acc24c318f549614536e",
+      "evidence": "https://crates.io/api/v1/crates/wit-bindgen/0.57.1"
+    },
+    {
+      "name": "zerocopy",
+      "version": "0.8.55",
+      "license": "BSD-2-Clause OR Apache-2.0 OR MIT",
+      "checksum": "b5a105cd7b140f6eeec8acff2ea38135d3cab283ada58540f629fe51e46696eb",
+      "evidence": "https://crates.io/api/v1/crates/zerocopy/0.8.55"
+    },
+    {
+      "name": "zerocopy-derive",
+      "version": "0.8.55",
+      "license": "BSD-2-Clause OR Apache-2.0 OR MIT",
+      "checksum": "0fe976fb70c78cd64cccfe3a6fc142244e8a77b70959b30faf9d0ac37ee228eb",
+      "evidence": "https://crates.io/api/v1/crates/zerocopy-derive/0.8.55"
+    },
+    {
+      "name": "zeroize",
+      "version": "1.9.0",
+      "license": "Apache-2.0 OR MIT",
+      "checksum": "e13c156562582aa81c60cb29407084cdb54c4164760106ab78e6c5b0858cf64e",
+      "evidence": "https://crates.io/api/v1/crates/zeroize/1.9.0"
+    },
+    {
+      "name": "zmij",
+      "version": "1.0.23",
+      "license": "MIT",
+      "checksum": "29666d0abbfad1e3dc4dcf6144730dd3a3ab225bbbdac83319345b1b44ccfc1b",
+      "evidence": "https://crates.io/api/v1/crates/zmij/1.0.23"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@ddn/demo-trust-profile",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./browser": {
+      "types": "./dist/browser.d.ts",
+      "default": "./dist/browser.js"
+    },
+    "./profile/trusted-demo-profile.json": "./profile/trusted-demo-profile.json"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src --max-warnings=0",
+    "test": "cd dist && node --test",
+    "test:integration": "node --test dist/deploy-and-verify.integration.test.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "profile:generate": "node dist/generate-trusted-demo-profile.js --confirm-update",
+    "profile:check": "node dist/generate-trusted-demo-profile.js --check"
+  },
+  "dependencies": {
+    "@ddn/crypto": "workspace:*",
+    "@ddn/receipt-sdk": "workspace:*",
+    "viem": "^2.55.10"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  }
+}

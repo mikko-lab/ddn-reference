@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/api-v1/validator-progress-response.schema.json",
+  "title": "ValidatorProgressResponseV1",
+  "description": "200 response body for GET /v1/decisions/{decisionId}/validators (Milestone 7). Mirrors real per-validator subprocess lifecycle events, never a timer or a fabricated state -- see docs/public-demo-boundary.md. Carries only validatorId, phase, updatedAt, and (once available) the validated outputHash: never raw stdout/stderr, error detail, file paths, or key material. An empty validators array means the decision exists but hasn't started running validators yet (still PENDING).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "decisionId", "validators"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "decisionId": { "type": "string", "minLength": 1 },
+    "validators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["validatorId", "phase", "updatedAt"],
+        "properties": {
+          "validatorId": { "type": "string", "minLength": 1 },
+          "phase": { "enum": ["PENDING", "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT"] },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "outputHash": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

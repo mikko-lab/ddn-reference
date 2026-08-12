@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "VALID",
+  "receiptId": "sha256:c41619539a4613f6b6a21cf86f6387b954544c6973885ac6096d7f6e2d18a158",
+  "checks": [
+    { "name": "schemaValid", "passed": true },
+    { "name": "validatorSetIdMatchesItsOwnContent", "passed": true },
+    { "name": "receiptValidatorSetIdMatchesGivenSet", "passed": true },
+    { "name": "receiptThresholdMatchesValidatorSet", "passed": true },
+    { "name": "receiptTotalValidatorsMatchesSet", "passed": true },
+    { "name": "agreeingValidatorIdsAreSorted", "passed": true },
+    { "name": "signedResultsAreSortedByValidatorId", "passed": true },
+    { "name": "everyContributingValidatorIdMatchesPublicKey", "passed": true },
+    { "name": "everyContributingSignatureValid", "passed": true },
+    { "name": "everyContributingResultBoundToRequest", "passed": true },
+    { "name": "everyContributingValidatorInSet", "passed": true },
+    { "name": "noDuplicateContributingValidatorIds", "passed": true },
+    { "name": "allSignedResultsShareReceiptConsensus", "passed": true },
+    { "name": "agreeingValidatorIdsMatchSignedResults", "passed": true },
+    { "name": "quorumThresholdReached", "passed": true },
+    { "name": "receiptIdMatchesContent", "passed": true }
+  ]
+}

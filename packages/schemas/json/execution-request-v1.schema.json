@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/execution-request-v1.schema.json",
+  "title": "ExecutionRequestV1",
+  "description": "A request to a DDN validator to execute a specific pinned policy artifact against a specific input. policyHash/profileHash/manifestHash/inputHash are the requester's claims; the validator independently recomputes and verifies each one rather than trusting them (see docs/validator-result-v1.md).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "policyId",
+    "policyVersion",
+    "policyHash",
+    "profileHash",
+    "manifestHash",
+    "input",
+    "inputHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "requestId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "policyId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "policyVersion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "policyHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "profileHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "manifestHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "input": {
+      "type": "object"
+    },
+    "inputHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

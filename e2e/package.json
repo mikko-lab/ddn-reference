@@ -1,0 +1,28 @@
+{
+  "name": "@ddn/e2e",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src tests --max-warnings=0",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test dist/src/*.test.js",
+    "test:e2e": "node dist/src/run-e2e.js"
+  },
+  "dependencies": {
+    "@ddn/client-sdk": "workspace:*",
+    "@ddn/coordinator": "workspace:*",
+    "@ddn/crypto": "workspace:*",
+    "@ddn/demo-trust-profile": "workspace:*",
+    "@ddn/receipt-sdk": "workspace:*",
+    "@ddn/schemas": "workspace:*",
+    "viem": "^2.55.10"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}

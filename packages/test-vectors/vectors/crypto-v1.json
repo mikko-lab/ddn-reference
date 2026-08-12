@@ -1,0 +1,36 @@
+{
+  "fixtureClassification": "TEST-ONLY / NEVER USE IN PRODUCTION",
+  "vectorVersion": "1.0.0",
+  "ed25519": {
+    "note": "Synthetic keypair generated for this repository. Not a production key.",
+    "privateKeySeedHex": "d6ef35bf5f26199e80b600c4080b662e46ef6f4f094dc5420185da513a19e4b7",
+    "publicKeyHex": "d9625026417719b578b328dd9e77cae7e078fc228f53f4834123c334674dd26a",
+    "messageHex": "44444e206d696c6573746f6e6520312d322073796e746865746963206e65676f74696174696f6e206465636973696f6e",
+    "messageText": "DDN milestone 1-2 synthetic negotiation decision",
+    "signatureHex": "6c91f8bda8d6b8fedf69c960c75f06cf6f9d80ff221e60509a3402d30428fd8d1f2b839d1471aa71d3c9333d834f8ce6ce6084a0a9871ae4455f09d788c81301",
+    "expectedVerifyResult": true,
+    "tamperedMessageHex": "44444e206d696c6573746f6e6520312d322073796e746865746963206e65676f74696174696f6e206465636973696f6e21",
+    "tamperedMessageExpectedVerifyResult": false,
+    "tamperedSignatureHex": "6c91f8bda8d6b8fedf69c960c75f06cf6f9d80ff221e60509a3402d30428fd8d1f2b839d1471aa71d3c9333d834f8ce6ce6084a0a9871ae4455f09d788c81300",
+    "tamperedSignatureExpectedVerifyResult": false,
+    "wrongPublicKeyHex": "85c76a582b2297ea4f4d56ca1d3ad8161b81e638fae588facf0ada2ae70c300a",
+    "wrongPublicKeyExpectedVerifyResult": false
+  },
+  "sha256": [
+    {
+      "id": "empty-string",
+      "text": "",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ascii-text",
+      "text": "hello ddn",
+      "sha256": "sha256:df5d0ac96f7a7b6749a09f1a9c463287eb8f7783f5ef71e498efaef366fe7dab"
+    },
+    {
+      "id": "finnish-text",
+      "text": "kärkkäinen räätäli",
+      "sha256": "sha256:90d24913bbf3e04226483c418e72e8fc81fbcbe7163a56e24f66d38d34839d52"
+    }
+  ]
+}

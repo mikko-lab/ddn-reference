@@ -1,0 +1,290 @@
+{
+  "vectorVersion": "1.0.0",
+  "valid": [
+    {
+      "id": "empty-object",
+      "inputJson": "{}",
+      "canonicalJson": "{}",
+      "sha256": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "id": "empty-array",
+      "inputJson": "[]",
+      "canonicalJson": "[]",
+      "sha256": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "id": "null-value",
+      "inputJson": "null",
+      "canonicalJson": "null",
+      "sha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "id": "true-value",
+      "inputJson": "true",
+      "canonicalJson": "true",
+      "sha256": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "id": "false-value",
+      "inputJson": "false",
+      "canonicalJson": "false",
+      "sha256": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+    },
+    {
+      "id": "zero",
+      "inputJson": "0",
+      "canonicalJson": "0",
+      "sha256": "sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "id": "positive-integer",
+      "inputJson": "42",
+      "canonicalJson": "42",
+      "sha256": "sha256:73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+    },
+    {
+      "id": "negative-integer",
+      "inputJson": "-42",
+      "canonicalJson": "-42",
+      "sha256": "sha256:fec80006df0542549b4cbaafb8987eee00bb49bca396eefe9ac8be5b5928e8f6"
+    },
+    {
+      "id": "max-safe-integer",
+      "inputJson": "9007199254740991",
+      "canonicalJson": "9007199254740991",
+      "sha256": "sha256:f40b423c2dd95ff2b2f027e22208f438cf7242862e5e746860e697308c9add26"
+    },
+    {
+      "id": "min-safe-integer",
+      "inputJson": "-9007199254740991",
+      "canonicalJson": "-9007199254740991",
+      "sha256": "sha256:4c933a456bb8f2e9894b2d0b26480439cd72d52fb8a27cbf8fd7f323f22c7815"
+    },
+    {
+      "id": "nested-objects",
+      "inputJson": "{\"a\":{\"b\":{\"c\":1}}}",
+      "canonicalJson": "{\"a\":{\"b\":{\"c\":1}}}",
+      "sha256": "sha256:23b7fe02eabd305fc16aa735008b290c197a7e0514c2a4a31f2fe2d68825394e"
+    },
+    {
+      "id": "nested-arrays",
+      "inputJson": "[[1,2],[3,[4,5]]]",
+      "canonicalJson": "[[1,2],[3,[4,5]]]",
+      "sha256": "sha256:7f9ac81ac763c420338e149551a71ea3bab81390b09e7f56823940acad97e306"
+    },
+    {
+      "id": "key-order-reversed",
+      "inputJson": "{\"b\":1,\"a\":2}",
+      "canonicalJson": "{\"a\":2,\"b\":1}",
+      "sha256": "sha256:d3626ac30a87e6f7a6428233b3c68299976865fa5508e4267c5415c76af7a772"
+    },
+    {
+      "id": "key-order-mixed-case",
+      "inputJson": "{\"B\":1,\"a\":2,\"A\":3,\"b\":4}",
+      "canonicalJson": "{\"A\":3,\"B\":1,\"a\":2,\"b\":4}",
+      "sha256": "sha256:d93ddd0d3af6dc0387cfa71776636d01446a270a9362210a9621d5b6a04c9d02"
+    },
+    {
+      "id": "unicode-string",
+      "inputJson": "\"caf\\u00e9\"",
+      "canonicalJson": "\"café\"",
+      "sha256": "sha256:28380feb8724d669bc8d4cf5b5a5bb1adbdc61b81ebd06f3fabc567b4f3b0fc5"
+    },
+    {
+      "id": "finnish-characters",
+      "inputJson": "\"\\u00e4\\u00f6\\u00e5 \\u00c4\\u00d6\\u00c5\"",
+      "canonicalJson": "\"äöå ÄÖÅ\"",
+      "sha256": "sha256:79710b6450955e315fdc2e34766b0613cebb77140a7ad6e8ec4bc7be6cb57aff"
+    },
+    {
+      "id": "emoji",
+      "inputJson": "\"\\ud83d\\ude00\"",
+      "canonicalJson": "\"😀\"",
+      "sha256": "sha256:7a0c50b92434b015545fe93ab723db2d4b2cdd14a441405624a9ce8be29f1d5a"
+    },
+    {
+      "id": "escape-characters",
+      "inputJson": "\"line1\\nline2\\ttab\\\\backslash\\\"quote\"",
+      "canonicalJson": "\"line1\\nline2\\ttab\\\\backslash\\\"quote\"",
+      "sha256": "sha256:d6fd53477aad9deed3fbc566ba4d0b34f2f924ab933172f85ae82960cd8e765f"
+    },
+    {
+      "id": "newline-in-string",
+      "inputJson": "\"a\\nb\"",
+      "canonicalJson": "\"a\\nb\"",
+      "sha256": "sha256:8cb67f89f9ff0e25bb064da96907151d8e0eb7a5c0d4cde1b72ad1c9a30c065e"
+    },
+    {
+      "id": "empty-string",
+      "inputJson": "\"\"",
+      "canonicalJson": "\"\"",
+      "sha256": "sha256:12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+    },
+    {
+      "id": "array-of-strings",
+      "inputJson": "[\"a\",\"b\",\"c\"]",
+      "canonicalJson": "[\"a\",\"b\",\"c\"]",
+      "sha256": "sha256:fa1844c2988ad15ab7b49e0ece09684500fad94df916859fb9a43ff85f5bb477"
+    },
+    {
+      "id": "multiple-reason-codes",
+      "inputJson": "{\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"]}",
+      "canonicalJson": "{\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"]}",
+      "sha256": "sha256:fc73b166e08cc0c1d15027820ff59dee6c2610d2deea8afeca33b3170549240d"
+    },
+    {
+      "id": "reference-input",
+      "inputJson": "{\"schemaVersion\":\"1.0.0\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\",\"sessionId\":\"session-synthetic-01\",\"listPriceCents\":2500000,\"floorPriceCents\":2300000,\"customerOfferCents\":2200000,\"offerNumber\":1,\"maxOffers\":4,\"conditionReportAcknowledged\":true,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\"}",
+      "canonicalJson": "{\"conditionReportAcknowledged\":true,\"customerOfferCents\":2200000,\"floorPriceCents\":2300000,\"listPriceCents\":2500000,\"maxOffers\":4,\"offerNumber\":1,\"policyEffectiveAt\":\"2026-01-01T00:00:00Z\",\"schemaVersion\":\"1.0.0\",\"sessionId\":\"session-synthetic-01\",\"tenantId\":\"tenant-synthetic-01\",\"vehicleId\":\"vehicle-synthetic-01\"}",
+      "sha256": "sha256:10745c8de44a068f0e2e74c64b2e29451787160bed4c1f0cd224e7ffb0fbd382"
+    },
+    {
+      "id": "reference-output",
+      "inputJson": "{\"schemaVersion\":\"1.0.0\",\"decision\":\"COUNTER\",\"counterOfferCents\":2300000,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"humanReviewRequired\":false}",
+      "canonicalJson": "{\"counterOfferCents\":2300000,\"decision\":\"COUNTER\",\"humanReviewRequired\":false,\"reasonCodes\":[\"OFFER_BELOW_FLOOR\",\"FINAL_COUNTER_AVAILABLE\"],\"schemaVersion\":\"1.0.0\"}",
+      "sha256": "sha256:320446bd4a2cec9362d127228ca596b4ee30fc164451bc93c557d916d07497ee"
+    },
+    {
+      "id": "object-key-with-space",
+      "inputJson": "{\"a b\":1}",
+      "canonicalJson": "{\"a b\":1}",
+      "sha256": "sha256:42506e1bd28e359193e5be915b4a52e43b8aeb1c5e52a19ccf3bd349e627ab9b"
+    },
+    {
+      "id": "object-key-with-unicode",
+      "inputJson": "{\"\\u00e4\\u00e4\":1}",
+      "canonicalJson": "{\"ää\":1}",
+      "sha256": "sha256:7bab094b36e1d167830d3baf5af5ff9f8408ad9f74435907644d353d2ce7d02e"
+    },
+    {
+      "id": "deeply-nested",
+      "inputJson": "{\"a\":[{\"b\":[1,2,{\"c\":3}]}]}",
+      "canonicalJson": "{\"a\":[{\"b\":[1,2,{\"c\":3}]}]}",
+      "sha256": "sha256:7fa9e9219f4ea7164584cfeff249565350c960a51f7512b4be2d0a40512aad76"
+    },
+    {
+      "id": "boolean-array",
+      "inputJson": "[true,false,true]",
+      "canonicalJson": "[true,false,true]",
+      "sha256": "sha256:e5b9a37d4601777b92e68e2f556d3ca1cb67f8085802a7022b1c179541a33658"
+    },
+    {
+      "id": "null-in-array",
+      "inputJson": "[null,1,null]",
+      "canonicalJson": "[null,1,null]",
+      "sha256": "sha256:bc78cf0d28818469fb84cfa63c4cf3bbcd0e75d71efeb080a15347c6c7e6c150"
+    },
+    {
+      "id": "single-char-keys-sort",
+      "inputJson": "{\"z\":1,\"y\":2,\"x\":3,\"a\":4}",
+      "canonicalJson": "{\"a\":4,\"x\":3,\"y\":2,\"z\":1}",
+      "sha256": "sha256:e78c3a4edf9f29d4271d3d5a529e2ebd0a631866a0477aed18ee210ef88359fc"
+    },
+    {
+      "id": "surrogate-pair-in-object-value",
+      "inputJson": "{\"emoji\":\"\\ud83c\\udf89\"}",
+      "canonicalJson": "{\"emoji\":\"🎉\"}",
+      "sha256": "sha256:55f193ece9ed10fc8d284702415f691d6903b36814589e7784fbd61ee1f2eeae"
+    },
+    {
+      "id": "large-nested-array",
+      "inputJson": "[[[[[1]]]]]",
+      "canonicalJson": "[[[[[1]]]]]",
+      "sha256": "sha256:6519ed63770a9e906ce65d0bf4fe903442923c93672f821d5c1417e39e100d91"
+    },
+    {
+      "id": "whitespace-in-input-is-not-significant",
+      "inputJson": "{\n  \"a\" : 1 ,\n  \"b\" : 2\n}",
+      "canonicalJson": "{\"a\":1,\"b\":2}",
+      "sha256": "sha256:43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777"
+    }
+  ],
+  "invalid": [
+    {
+      "id": "duplicate-key",
+      "inputJson": "{\"a\":1,\"a\":2}",
+      "errorCode": "DUPLICATE_JSON_KEY"
+    },
+    {
+      "id": "duplicate-key-nested",
+      "inputJson": "{\"a\":{\"b\":1,\"b\":2}}",
+      "errorCode": "DUPLICATE_JSON_KEY"
+    },
+    {
+      "id": "float",
+      "inputJson": "1.5",
+      "errorCode": "NON_INTEGER_NUMBER"
+    },
+    {
+      "id": "float-zero-fraction",
+      "inputJson": "1.0",
+      "errorCode": "NON_INTEGER_NUMBER"
+    },
+    {
+      "id": "exponential-integer-value",
+      "inputJson": "1e2",
+      "errorCode": "NON_INTEGER_NUMBER"
+    },
+    {
+      "id": "exponential-non-integer-value",
+      "inputJson": "1.5e1",
+      "errorCode": "NON_INTEGER_NUMBER"
+    },
+    {
+      "id": "unsafe-integer",
+      "inputJson": "9007199254740992",
+      "errorCode": "UNSAFE_INTEGER"
+    },
+    {
+      "id": "unsafe-negative-integer",
+      "inputJson": "-9007199254740992",
+      "errorCode": "UNSAFE_INTEGER"
+    },
+    {
+      "id": "unterminated-object",
+      "inputJson": "{\"a\":",
+      "errorCode": "INVALID_JSON"
+    },
+    {
+      "id": "invalid-json-syntax",
+      "inputJson": "{\"a\":}",
+      "errorCode": "INVALID_JSON"
+    },
+    {
+      "id": "trailing-comma-object",
+      "inputJson": "{\"a\":1,}",
+      "errorCode": "INVALID_JSON"
+    },
+    {
+      "id": "trailing-comma-array",
+      "inputJson": "[1,2,]",
+      "errorCode": "INVALID_JSON"
+    },
+    {
+      "id": "trailing-content",
+      "inputJson": "{\"a\":1} garbage",
+      "errorCode": "INVALID_JSON"
+    },
+    {
+      "id": "unterminated-string",
+      "inputJson": "\"abc",
+      "errorCode": "INVALID_JSON"
+    },
+    {
+      "id": "lone-high-surrogate",
+      "inputJson": "\"\\ud800\"",
+      "errorCode": "INVALID_UNICODE"
+    },
+    {
+      "id": "lone-low-surrogate",
+      "inputJson": "\"\\udc00\"",
+      "errorCode": "INVALID_UNICODE"
+    },
+    {
+      "id": "unescaped-control-character",
+      "inputJson": "\"a\tb\"",
+      "errorCode": "INVALID_JSON"
+    }
+  ]
+}

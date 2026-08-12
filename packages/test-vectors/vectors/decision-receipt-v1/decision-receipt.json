@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "request": {
+    "schemaVersion": "1.0.0",
+    "requestId": "req-decision-receipt-golden-vector-1",
+    "policyId": "negotiation-reference",
+    "policyVersion": "1.0.0",
+    "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+    "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+    "manifestHash": "sha256:7f1b7bb2bc8479b3d257ea525d2eff1e927b64c5cd006fb1ba01a3d4b785537f",
+    "input": {
+      "conditionReportAcknowledged": true,
+      "customerOfferCents": 2299999,
+      "floorPriceCents": 2300000,
+      "listPriceCents": 2500000,
+      "maxOffers": 4,
+      "offerNumber": 1,
+      "policyEffectiveAt": "2026-01-01T00:00:00Z",
+      "schemaVersion": "1.0.0",
+      "sessionId": "session-synthetic-01",
+      "tenantId": "tenant-synthetic-01",
+      "vehicleId": "vehicle-synthetic-01"
+    },
+    "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f"
+  },
+  "quorum": {
+    "validatorSetId": "sha256:7bc9c46f0de8a20e5763cda5aedfa3070ca619b2056b6cff42afbc48369fc3a6",
+    "threshold": 2,
+    "totalValidators": 3,
+    "agreeingValidatorIds": [
+      "sha256:47910108d7be9aa20587a85f284b4c6c3aa25f2f936ad86874f3ffbaed51fa5b",
+      "sha256:809b417dcd07f1def6cf3f4658f27cf3791261d39bd7239d43fbd4a8a93b5b5c",
+      "sha256:f5b0ef9c1e852ae2eb26447a8bf711f504be59e7abe79d37e515229e4d23f7f4"
+    ]
+  },
+  "consensus": {
+    "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+    "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+    "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f",
+    "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010",
+    "executionHash": "sha256:4022569814727cd4c38c4cf3cdf2722eb19fe01a6ebc99e3b7fd0e4f49b493b4",
+    "status": "SUCCESS"
+  },
+  "signedResults": [
+    {
+      "result": {
+        "schemaVersion": "1.0.0",
+        "requestId": "req-decision-receipt-golden-vector-1",
+        "validatorId": "sha256:47910108d7be9aa20587a85f284b4c6c3aa25f2f936ad86874f3ffbaed51fa5b",
+        "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+        "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+        "manifestHash": "sha256:7f1b7bb2bc8479b3d257ea525d2eff1e927b64c5cd006fb1ba01a3d4b785537f",
+        "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f",
+        "output": {
+          "counterOfferCents": 2300000,
+          "decision": "COUNTER",
+          "humanReviewRequired": false,
+          "reasonCodes": [
+            "OFFER_BELOW_FLOOR",
+            "FINAL_COUNTER_AVAILABLE"
+          ],
+          "schemaVersion": "1.0.0"
+        },
+        "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010",
+        "executionHash": "sha256:4022569814727cd4c38c4cf3cdf2722eb19fe01a6ebc99e3b7fd0e4f49b493b4",
+        "status": "SUCCESS"
+      },
+      "validatorPublicKey": "cb3065d80f1e2ced6c8c8bdf66cb7809fa384fef4566de4c9b4110919dc23e4b",
+      "signatureAlgorithm": "ed25519",
+      "signature": "0acb69becd01e67dd92e2397cf8e525c62a0c43121328a6bc75a8f362eaaa2b21550d963032f340802176d33f664201ea636dee886e3449f9d88d2e89cb8fe0b"
+    },
+    {
+      "result": {
+        "schemaVersion": "1.0.0",
+        "requestId": "req-decision-receipt-golden-vector-1",
+        "validatorId": "sha256:809b417dcd07f1def6cf3f4658f27cf3791261d39bd7239d43fbd4a8a93b5b5c",
+        "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+        "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+        "manifestHash": "sha256:7f1b7bb2bc8479b3d257ea525d2eff1e927b64c5cd006fb1ba01a3d4b785537f",
+        "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f",
+        "output": {
+          "counterOfferCents": 2300000,
+          "decision": "COUNTER",
+          "humanReviewRequired": false,
+          "reasonCodes": [
+            "OFFER_BELOW_FLOOR",
+            "FINAL_COUNTER_AVAILABLE"
+          ],
+          "schemaVersion": "1.0.0"
+        },
+        "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010",
+        "executionHash": "sha256:4022569814727cd4c38c4cf3cdf2722eb19fe01a6ebc99e3b7fd0e4f49b493b4",
+        "status": "SUCCESS"
+      },
+      "validatorPublicKey": "95e8bb3978993937bb170e0120be891861b8d90c7430c470909a4f63e83d4180",
+      "signatureAlgorithm": "ed25519",
+      "signature": "8f1331792fc06c77caa40fa3eaa91670a176f29cef741a1006afe590cb7c74c506fc7ddfb21a64f272a90f2972c1150fbdcfb7c12228dd9289ea4d69eeb89e0a"
+    },
+    {
+      "result": {
+        "schemaVersion": "1.0.0",
+        "requestId": "req-decision-receipt-golden-vector-1",
+        "validatorId": "sha256:f5b0ef9c1e852ae2eb26447a8bf711f504be59e7abe79d37e515229e4d23f7f4",
+        "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+        "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+        "manifestHash": "sha256:7f1b7bb2bc8479b3d257ea525d2eff1e927b64c5cd006fb1ba01a3d4b785537f",
+        "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f",
+        "output": {
+          "counterOfferCents": 2300000,
+          "decision": "COUNTER",
+          "humanReviewRequired": false,
+          "reasonCodes": [
+            "OFFER_BELOW_FLOOR",
+            "FINAL_COUNTER_AVAILABLE"
+          ],
+          "schemaVersion": "1.0.0"
+        },
+        "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010",
+        "executionHash": "sha256:4022569814727cd4c38c4cf3cdf2722eb19fe01a6ebc99e3b7fd0e4f49b493b4",
+        "status": "SUCCESS"
+      },
+      "validatorPublicKey": "ae97d90d2a92da0254825e8fd1bf2ad3096a7ac5bcf67a38e61b22a66a97381e",
+      "signatureAlgorithm": "ed25519",
+      "signature": "136e2d2a8347126c09d27672a59680f65df67f50955bb80a522f96ba2d890b8adf7c7e2d6f52530b7b2b2500584fe3fbcec73929e178e3799445ca4e35ce2905"
+    }
+  ],
+  "receiptId": "sha256:aea846bc7e9bafd513e6059aac2a2e5e0f2702034014ecc5bd5d0f33aab3df7e"
+}

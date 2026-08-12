@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "."
+  },
+  "include": ["src", "tests", "playwright.config.ts"],
+  "references": [
+    { "path": "../apps/coordinator" },
+    { "path": "../packages/demo-trust-profile" },
+    { "path": "../packages/client-sdk" },
+    { "path": "../packages/receipt-sdk" },
+    { "path": "../packages/schemas" }
+  ]
+}

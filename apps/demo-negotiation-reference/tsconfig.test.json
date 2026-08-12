@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist-test",
+    "rootDir": "src",
+    "composite": false,
+    "incremental": false,
+    "module": "commonjs",
+    "moduleResolution": "node10"
+  },
+  "include": [
+    "src/lib/offer-input.ts",
+    "src/lib/offer-input.test.ts",
+    "src/lib/offer-session.ts",
+    "src/lib/offer-session.test.ts",
+    "src/lib/reference-bff-env.ts",
+    "src/lib/reference-bff-env.test.ts",
+    "src/lib/offer-input-server.ts",
+    "src/lib/offer-input-server.test.ts",
+    "src/lib/request-guards.ts",
+    "src/lib/request-guards.test.ts"
+  ]
+}

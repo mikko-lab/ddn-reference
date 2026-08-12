@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/api-v1/policy-list-response.schema.json",
+  "title": "PolicyListResponseV1",
+  "description": "200 response body for GET /v1/policies.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "policies"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["policyId", "policyVersion", "policyHash", "profileHash", "status"],
+        "properties": {
+          "policyId": { "type": "string", "minLength": 1 },
+          "policyVersion": { "type": "string", "minLength": 1 },
+          "policyHash": { "type": "string", "minLength": 1 },
+          "profileHash": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["ACTIVE", "INACTIVE"] }
+        }
+      }
+    }
+  }
+}

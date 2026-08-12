@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "requestId": "req-golden-vector-1",
+  "policyId": "negotiation-reference",
+  "policyVersion": "1.0.0",
+  "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+  "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+  "manifestHash": "sha256:7f1b7bb2bc8479b3d257ea525d2eff1e927b64c5cd006fb1ba01a3d4b785537f",
+  "input": {
+    "conditionReportAcknowledged": true,
+    "customerOfferCents": 2299999,
+    "floorPriceCents": 2300000,
+    "listPriceCents": 2500000,
+    "maxOffers": 4,
+    "offerNumber": 1,
+    "policyEffectiveAt": "2026-01-01T00:00:00Z",
+    "schemaVersion": "1.0.0",
+    "sessionId": "session-synthetic-01",
+    "tenantId": "tenant-synthetic-01",
+    "vehicleId": "vehicle-synthetic-01"
+  },
+  "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f"
+}

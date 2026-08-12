@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ddn.mikko-lab.dev/schemas/negotiation-input-v1.schema.json",
+  "title": "NegotiationInputV1",
+  "description": "DDN negotiation-v1 policy input. Structural/type constraints only; the cross-field invariants floorPriceCents <= listPriceCents and offerNumber <= maxOffers are not expressible in portable JSON Schema and are enforced separately at runtime (see packages/schemas/src/index.ts).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "tenantId",
+    "vehicleId",
+    "sessionId",
+    "listPriceCents",
+    "floorPriceCents",
+    "customerOfferCents",
+    "offerNumber",
+    "maxOffers",
+    "conditionReportAcknowledged",
+    "policyEffectiveAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "tenantId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "vehicleId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "listPriceCents": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "floorPriceCents": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "customerOfferCents": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "offerNumber": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxOffers": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "conditionReportAcknowledged": {
+      "type": "boolean"
+    },
+    "policyEffectiveAt": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?Z$"
+    }
+  }
+}

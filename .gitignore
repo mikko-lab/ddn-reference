@@ -1,0 +1,33 @@
+# Node / pnpm
+node_modules/
+dist/
+dist-test/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+
+# Rust
+target/
+
+# Built policy packages (regenerate via scripts/build-policy.sh or
+# scripts/policy-reproducibility.sh — see docs/execution-profile-v1.md)
+policies/*/package/
+
+# Foundry
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Env
+.env
+.env.local

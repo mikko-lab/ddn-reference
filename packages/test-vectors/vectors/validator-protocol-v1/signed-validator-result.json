@@ -1,0 +1,27 @@
+{
+  "result": {
+    "schemaVersion": "1.0.0",
+    "requestId": "req-golden-vector-1",
+    "validatorId": "sha256:9f312788b396aed4c6bcba0f5da72992192076cb5d49caebe8138782311f1a4f",
+    "policyHash": "sha256:62bb7ca911c6257ec4bea116090b8d0c8607e7d2bbbbf430805f58270c68280a",
+    "profileHash": "sha256:bed8e81c5293be85b076cb03e738c339f3f1f5324bda7382d954b6dacbf169bd",
+    "manifestHash": "sha256:7f1b7bb2bc8479b3d257ea525d2eff1e927b64c5cd006fb1ba01a3d4b785537f",
+    "inputHash": "sha256:c74a8b124bf200331d9021c0531f15b97f99cddf4f6c510f77e2953c2b9d078f",
+    "output": {
+      "counterOfferCents": 2300000,
+      "decision": "COUNTER",
+      "humanReviewRequired": false,
+      "reasonCodes": [
+        "OFFER_BELOW_FLOOR",
+        "FINAL_COUNTER_AVAILABLE"
+      ],
+      "schemaVersion": "1.0.0"
+    },
+    "outputHash": "sha256:46c563ca501d1743b2cec8c3f244890976ddc25b929cdfb2ebf470ce4ceb5010",
+    "executionHash": "sha256:4022569814727cd4c38c4cf3cdf2722eb19fe01a6ebc99e3b7fd0e4f49b493b4",
+    "status": "SUCCESS"
+  },
+  "validatorPublicKey": "d9625026417719b578b328dd9e77cae7e078fc228f53f4834123c334674dd26a",
+  "signatureAlgorithm": "ed25519",
+  "signature": "4350fc9423ba6e9c55776867a09d5e2538b6eb3b0379a0829d3a506f1f0e9c8a14e72c4fed574c85d3685f01b8b02ce25cb96cbf18d95c0c9e4b3c03f8cfa90c"
+}

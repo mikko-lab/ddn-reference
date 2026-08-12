@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "One receipt: root === leafHash directly, proof has zero siblings.",
+  "receiptIds": [
+    "sha256:8888888888888888888888888888888888888888888888888888888888888888"
+  ],
+  "sortedReceiptIds": [
+    "sha256:8888888888888888888888888888888888888888888888888888888888888888"
+  ],
+  "leaves": [
+    "sha256:fa464354897b8346c8b6274117ce39ae5e9927f6b27314cec4adbae4ad6f9ff9"
+  ],
+  "root": "sha256:fa464354897b8346c8b6274117ce39ae5e9927f6b27314cec4adbae4ad6f9ff9",
+  "proofs": {
+    "sha256:8888888888888888888888888888888888888888888888888888888888888888": {
+      "leafHash": "sha256:fa464354897b8346c8b6274117ce39ae5e9927f6b27314cec4adbae4ad6f9ff9",
+      "leafIndex": 0,
+      "siblings": [],
+      "totalLeaves": 1
+    }
+  }
+}

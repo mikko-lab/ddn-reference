@@ -1,0 +1,25 @@
+{
+  "name": "@ddn/anchor-service",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src --max-warnings=0",
+    "test": "cd dist && node --test",
+    "test:integration": "node --test dist/chain-client.integration.test.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@ddn/crypto": "workspace:*",
+    "@ddn/receipt-sdk": "workspace:*",
+    "viem": "^2.55.10"
+  }
+}
