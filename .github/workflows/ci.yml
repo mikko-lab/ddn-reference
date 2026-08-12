@@ -22,6 +22,7 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run test
       - run: pnpm run typecheck
+      - run: pnpm run test:ci-workflow
       - name: OpenAPI document is up to date with the committed JSON Schemas
         run: pnpm --filter @ddn/api run openapi:check
       - name: Merkle V1 golden vectors are up to date with the committed implementation
@@ -151,7 +152,12 @@ jobs:
     # cross-architecture validation and does not overwrite policy.wasm,
     # manifest.json, or the profile either way.
     #
-    # Explicitly experimental and non-blocking (continue-on-error: true):
+    # Explicitly experimental and non-blocking: the validation step records
+    # its result, emits a visible Actions warning and uploads diagnostics, but
+    # exits successfully so a known experimental crash does not mark an
+    # otherwise green commit with a misleading red check. A success here is
+    # therefore NOT evidence that amd64 reproducibility passed; the step
+    # summary and diagnostics artifact remain the source of that result.
     # native amd64 currently fails nondeterministically with SIGSEGV in
     # host build-script binaries (proc-macro2, serde_json, ...) -- real,
     # reproduced on this native GitHub-hosted amd64 runner AND under QEMU,
@@ -163,7 +169,6 @@ jobs:
     # (not full rebuild loops or core dumps) for that investigation.
     name: Experimental cross-architecture validation (linux/amd64, non-blocking)
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
@@ -174,12 +179,36 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @ddn/schemas run build
       - run: node scripts/gen-reason-codes.mjs
-      - run: ./scripts/policy-reproducibility.sh
-      - name: Collect diagnostics (failure only)
-        if: failure()
+      - name: Run experimental amd64 validation without gating the commit
+        id: amd64-validation
+        shell: bash
+        run: |
+          set +e
+          ./scripts/policy-reproducibility.sh
+          status=$?
+          set -e
+
+          if [ "$status" -eq 0 ]; then
+            echo "failed=false" >> "$GITHUB_OUTPUT"
+            echo "### Experimental linux/amd64 validation: PASS" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Experimental linux/amd64 validation failed::Known non-blocking amd64 toolchain investigation failed with exit code $status; diagnostics will be uploaded. The linux/arm64 release gate is unaffected."
+            {
+              echo "### Experimental linux/amd64 validation: DID NOT PASS"
+              echo
+              echo "Exit code: $status. This check is diagnostic and does not gate the linux/arm64 release."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          exit 0
+      - name: Collect diagnostics (experimental failure only)
+        if: steps.amd64-validation.outputs.failed == 'true'
+        continue-on-error: true
         run: ./scripts/diagnose-amd64-crash.sh
-      - name: Upload diagnostics (failure only)
-        if: failure()
+      - name: Upload diagnostics (experimental failure only)
+        if: steps.amd64-validation.outputs.failed == 'true'
+        continue-on-error: true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: amd64-crash-diagnostics
